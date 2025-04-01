@@ -1,2 +1,9 @@
 /API/.env
-
+*.pyc
+*vs*
+*Debug*
+*.dSYM*
+*.exe
+*.pdb
+*.obj
+*.ilk
