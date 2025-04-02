@@ -16,9 +16,9 @@ def add_company_details_to_csv():
     with open('companies.json', 'r') as file:
         companies_details = json.load(file)
 
-        for comapany_detail in companies_details:
+        for company_detail in companies_details:
             # Initialize API objects
-            stock = stock_api.StockData(stock_symbol=companies_details['symbol'], company_name=comapany_detail['name'])
+            stock = stock_api.StockData(stock_symbol=company_detail['symbol'], company_name=company_detail['name'])
             
             # Ensure the output directory exists
             ensure_directory_exists("website/images")
@@ -35,7 +35,7 @@ def add_company_details_to_csv():
             print(f"Processed stock data saved to: {processed_file}")
 
 def main():
-    add_company_details_to_csv()
+    # add_company_details_to_csv()
     
     '''# Create visualizations
     visualizer = StockVisualizer()
