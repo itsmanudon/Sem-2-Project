@@ -7,6 +7,7 @@ This module contains the DataProcessor class for processing stock data from vari
 import pandas as pd
 import json
 from datetime import datetime
+import os
 
 class DataProcessor:
     """
@@ -23,6 +24,32 @@ class DataProcessor:
         self.data_file = data_file
         self.processed_df = None
         self.ticker = None
+
+    def dict_to_csv(self, data_dict, output_file=None):
+        """
+        Convert a Python dictionary to a CSV file using pandas DataFrame.
+        
+        Args:
+            data_dict (dict): Dictionary to convert to CSV
+            output_file (str, optional): Path to save the CSV file. If None, uses 'dict_data.csv'.
+            
+        Returns:
+            str: Path to the saved CSV file
+        """
+        if not data_dict:
+            raise ValueError("Dictionary cannot be empty")
+        
+        # Convert dictionary to DataFrame
+        df = pd.DataFrame(data_dict)
+        
+        # Determine output filename
+        if output_file is None:
+            output_file = "dict_data.csv"
+        
+        # Save to CSV
+        df.to_csv(output_file, index=False)
+        
+        return output_file
     
     def process_csv_data(self, csv_file=None):
         """
@@ -118,7 +145,9 @@ class DataProcessor:
         
         # Determine output filename
         if output_file is None:
-            output_file = f"{self.ticker}_processed.csv"
+            # Ensure the directory exists
+            os.makedirs("stock-data-csv-files", exist_ok=True)
+            output_file = f"stock-data-csv-files/{self.ticker}_processed.csv"
         
         # Save to CSV
         self.processed_df.to_csv(output_file, index=False)

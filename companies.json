@@ -1,0 +1,102 @@
+[
+  {
+    "symbol": "AAPL",
+    "name": "Apple Inc."
+  },
+  {
+    "symbol": "MSFT",
+    "name": "Microsoft Corporation"
+  },
+  {
+    "symbol": "GOOGL",
+    "name": "Alphabet Inc."
+  },
+  {
+    "symbol": "AMZN",
+    "name": "Amazon.com Inc."
+  },
+  {
+    "symbol": "META",
+    "name": "Meta Platforms Inc."
+  },
+  {
+    "symbol": "TSLA",
+    "name": "Tesla Inc."
+  },
+  {
+    "symbol": "NVDA",
+    "name": "NVIDIA Corporation"
+  },
+  {
+    "symbol": "JPM",
+    "name": "JPMorgan Chase & Co."
+  },
+  {
+    "symbol": "WMT",
+    "name": "Walmart Inc."
+  },
+  {
+    "symbol": "JNJ",
+    "name": "Johnson & Johnson"
+  },
+  {
+    "symbol": "V",
+    "name": "Visa Inc."
+  },
+  {
+    "symbol": "PG",
+    "name": "Procter & Gamble Co."
+  },
+  {
+    "symbol": "MA",
+    "name": "Mastercard Incorporated"
+  },
+  {
+    "symbol": "UNH",
+    "name": "UnitedHealth Group Incorporated"
+  },
+  {
+    "symbol": "HD",
+    "name": "The Home Depot Inc."
+  },
+  {
+    "symbol": "BAC",
+    "name": "Bank of America Corporation"
+  },
+  {
+    "symbol": "XOM",
+    "name": "Exxon Mobil Corporation"
+  },
+  {
+    "symbol": "INTC",
+    "name": "Intel Corporation"
+  },
+  {
+    "symbol": "PFE",
+    "name": "Pfizer Inc."
+  },
+  {
+    "symbol": "CSCO",
+    "name": "Cisco Systems Inc."
+  },
+  {
+    "symbol": "ADBE",
+    "name": "Adobe Inc."
+  },
+  {
+    "symbol": "NFLX",
+    "name": "Netflix Inc."
+  },
+  {
+    "symbol": "DIS",
+    "name": "The Walt Disney Company"
+  },
+  {
+    "symbol": "CRM",
+    "name": "Salesforce Inc."
+  },
+  {
+    "symbol": "KO",
+    "name": "The Coca-Cola Company"
+  }
+]
