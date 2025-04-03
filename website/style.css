@@ -16,6 +16,22 @@ body {
     font-size: 24px;
     font-weight: bold;
 }
+.buttons {
+    display: flex;
+    justify-content: left;
+}
+.buttons :hover {
+    text-decoration: underline;
+}
+.login {
+    background: linear-gradient(45deg, #007bff, #a000ff);
+    border: none;
+    padding: 10px 20px;
+    margin: 0 15px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
 .get-started {
     background: linear-gradient(45deg, #007bff, #a000ff);
     border: none;
@@ -41,7 +57,7 @@ h1 {
     cursor: pointer;
     font-size: 18px;
 }
-.tabs .active {
+.tabs button:hover {
     font-weight: bold;
     text-decoration: underline;
 }
@@ -49,7 +65,7 @@ h1 {
     max-width: 90%;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
+    box-shadow: 0 0 50px rgba(0, 0, 255, 0.5);
 }
 .explore {
     margin-top: 20px;
@@ -59,6 +75,9 @@ h1 {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+}
+.explore:hover {
+    text-decoration: underline;
 }
 @media (min-width: 768px) {
     .hero {
