@@ -4,6 +4,7 @@ from StockProcessing.data_processor import DataProcessor
 from StockProcessing.visualizer import StockVisualizer
 from StockProcessing.line_graph import LineGraph
 from StockProcessing.pie_chart import PieChart
+from StockProcessing.bar_graph import BarGraph
 import pandas as pd
 import os
 import json
@@ -39,13 +40,17 @@ def add_company_details_to_csv():
 def main():
     # add_company_details_to_csv()
 
-    line_graph = LineGraph(csv_file_path='./stock-data-csv-files/AAPL_processed.csv')
+    '''line_graph = LineGraph(csv_file_path='./stock-data-csv-files/AAPL_processed.csv')
     line_graph.create_line_graph(x_column='Date', y_column='Close', title='Apple Stock Price')
     line_graph.show_graph()
 
     pie_chart = PieChart(csv_file_path='./stock-data-csv-files/AMZN_processed.csv')
     pie_chart.create_pie_chart(column_name='Volume', title='Apple Stock Volume Distribution')
-    pie_chart.show_graph()
+    pie_chart.show_graph()'''
+
+    bar_graph = BarGraph(csv_file_path='./stock-data-csv-files/AMZN_processed.csv')
+    bar_graph.create_bar_graph()
+    bar_graph.show_graph()
     
     '''# Create visualizations
     visualizer = StockVisualizer()

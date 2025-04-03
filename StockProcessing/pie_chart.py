@@ -51,7 +51,6 @@ class PieChart:
             return None
         
         if title is None:
-            # Extract stock name from file path for title
             file_name = os.path.basename(self.csv_file_path)
             title = f"Pie Chart of {column_name} from {file_name}"
         
@@ -59,9 +58,32 @@ class PieChart:
         
         # Creating pie chart
         counts = self.data[column_name].value_counts()
-        plt.pie(counts, labels=counts.index, autopct='%1.1f%%', startangle=140)
         
-        plt.title(title, fontsize=16)
+        # If there are more than 10 categories, only show top 10
+        if len(counts) > 10:
+            other = pd.Series({'Others': counts[10:].sum()})
+            counts = pd.concat([counts[:10], other])
+        
+        # Create pie chart with better text alignment
+        wedges, texts, autotexts = plt.pie(counts, 
+                         labels=counts.index,
+                         autopct='%1.1f%%',
+                         startangle=90,
+                         pctdistance=0.85,
+                         labeldistance=1.1)
+        
+        # Enhance text properties
+        plt.setp(autotexts, size=8, weight="bold")
+        plt.setp(texts, size=8)
+        
+        # Add legend if there are many categories
+        if len(counts) > 5:
+            plt.legend(wedges, counts.index,
+                  title=column_name,
+                  loc="center left",
+                  bbox_to_anchor=(1, 0, 0.5, 1))
+        
+        plt.title(title, fontsize=16, pad=20)
         plt.tight_layout()
         
         return plt.gcf()
