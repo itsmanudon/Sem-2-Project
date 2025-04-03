@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #111;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+.get-started {
+    background: linear-gradient(45deg, #007bff, #a000ff);
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.hero {
+    padding: 50px 20px;
+}
+h1 {
+    font-size: 36px;
+}
+.tabs {
+    margin: 20px 0;
+}
+.tabs button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 18px;
+}
+.tabs .active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+.chart-container img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
+}
+.explore {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+@media (min-width: 768px) {
+    .hero {
+        max-width: 800px;
+        margin: auto;
+    }
+}
