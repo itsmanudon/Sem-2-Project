@@ -70,6 +70,9 @@ class LineGraph:
         
         return plt.gcf()
     
+    """Save the current graph to a file.
+    Parameters:"""
+    
     def save_graph(self, output_path=None, dpi=300):
         """
         Save the current graph to a file.
