@@ -32,9 +32,9 @@ nav ul li a {
     color: #fff;
 }
 
-nav ul li a.active {
-    color: #a000ff;
+nav ul li a:hover {
     font-weight: bold;
+    color: #503eff;
 }
 
 .auth-container {
@@ -51,7 +51,7 @@ nav ul li a.active {
     border-radius: 12px;
     max-width: 400px;
     width: 100%;
-    box-shadow: 0 0 20px rgba(160, 0, 255, 0.4);
+    box-shadow: 0 0 50px rgba(98, 0, 255, 0.637);
     color: white;
 }
 
@@ -91,6 +91,7 @@ nav ul li a.active {
     font-size: 14px;
     color: #ccc;
     text-decoration: none;
+    margin: 10px;
 }
 
 .forgot-password:hover {
