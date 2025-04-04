@@ -88,7 +88,7 @@ h1 {
 }
 
 .popular-stocks {
-    width: 97%;
+    width: 97.5%;
     justify-content: center;
     padding: 20px;
     background: black;
@@ -140,6 +140,7 @@ h1 {
     flex-shrink: 0;
     scroll-snap-align: start;
     padding: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .slide:hover {
