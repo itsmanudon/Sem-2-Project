@@ -37,6 +37,32 @@ body {
 
 .button:hover {
     transform: scale(1.05);
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+header, footer {
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #bbb;
 }
 
 .container {
@@ -115,6 +141,7 @@ body {
     align-items: flex-start;
     padding-left: 20px;
 }
+
 
 select, input[type="date"], button {
     padding: 8px;
