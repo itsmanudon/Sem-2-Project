@@ -1,3 +1,6 @@
+/* filepath: d:\Github Repos\Sem-2-Project\website\about-us.css */
+
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,6 +9,8 @@ body {
     color: #fff;
     text-align: center;
 }
+
+/* Header Section */
 .nav {
     display: flex;
     justify-content: space-between;
@@ -37,131 +42,74 @@ body {
     transform: scale(1.05);
 }
 
-.hero {
-    padding: 50px 20px;
-}
-h1 {
-    font-size: 36px;
-}
-.tabs {
-    margin: 20px 0;
-}
-.tabs a {
-    background: none;
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 18px;
-    text-decoration: none;
-}
-
-.tabs a:hover {
-    font-weight: bold;
-}
-
-.chart-container img {
-    max-width: 90%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 0 50px rgba(0, 0, 255, 0.5);
-}
-.explore {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: linear-gradient(45deg, #007bff, #a000ff);
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-@media (min-width: 768px) {
-    .hero {
-        max-width: 800px;
-        margin: auto;
-    }
-}
-
-.popular-stocks {
-    width: 97.5%;
-    justify-content: center;
+/* About Content Container */
+.about-content {
+    max-width: 800px;
+    margin: 40px auto;
     padding: 20px;
-    background: black;
-    display: flex;
-    flex-direction: column;
-}
-
-.section-title {
-    color: #ffffff;
-    font-size: 24px;
-    margin-bottom: 10px;
     text-align: left;
-    font-weight: bold;
 }
 
-.slider-container {
-    width: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    display: flex;
-    scrollbar-width: thin;
-    -ms-overflow-style: auto;
-    white-space: nowrap;
+.about-content h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #503eff;
     padding-bottom: 10px;
 }
 
-.slider-wrapper {
-    display: flex;
-    gap: 20px;
-    flex-wrap: nowrap;
-    padding-right: 20px;
+.about-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
-.slider-wrapper a {
-    text-decoration: none;
-}
-
-.slide {
-    width: 300px;
-    height: 350px;
-    background: #f0f0f0;
-    color: black;
+/* Team Cards */
+.team-container {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    align-items: center;
+    gap: 20px;
     justify-content: center;
-    font-size: 18px;
-    border-radius: 12px;
-    flex-shrink: 0;
-    scroll-snap-align: start;
-    padding: 15px;
-    margin-top: 1rem;
-    transition: transform 0.4s ease;
+    align-items: center;
+    padding: 20px;
 }
 
-.slide:hover {
-    background: #d0d0d0;
-    color: #503eff;
-    transition: transform 0.4s ease;
-    transform: translateY(-1rem);
+.team-card {
+    background: #111;
+    max-width: 800px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
 }
 
-.slide img {
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-radius: 10px;
 }
 
-@media (max-width: 768px) {
-    .slide {
-        width: 250px;
-        height: 300px;
-        font-size: 16px;
-    }
+.team-card .card-content {
+    padding: 20px;
+    text-align: left;
 }
 
+.team-card .card-content h1 {
+    margin: 0 0 20px;
+    font-size: 24px;
+}
+
+.team-card .card-content p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+/* Footer Styling */
 footer {
     background-color: #111;
     padding: 40px 20px 20px;
@@ -240,4 +188,16 @@ footer {
     color: #888;
     font-size: 14px;
     text-align: center;
+}
+
+
+/* Responsive Enhancements */
+@media (min-width: 768px) {
+    .about-content {
+        padding: 40px;
+    }
+
+    .team-container {
+        justify-content: space-between;
+    }
 }
