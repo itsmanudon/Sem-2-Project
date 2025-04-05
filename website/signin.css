@@ -120,6 +120,7 @@ nav ul li a:hover {
 
 .auth-switch a {
     color: #a000ff;
+    font-weight: bold;
     text-decoration: none;
 }
 
