@@ -20,26 +20,23 @@ body {
     display: flex;
     justify-content: left;
 }
-.buttons :hover {
-    text-decoration: underline;
-}
-.login {
-    background: linear-gradient(45deg, #007bff, #a000ff);
-    border: none;
-    padding: 10px 20px;
-    margin: 0 15px;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-}
-.get-started {
+
+.button{
     background: linear-gradient(45deg, #007bff, #a000ff);
     border: none;
     padding: 10px 20px;
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    margin: 0 5px;
+    transition: transform 0.3s ease;
 }
+
+.button:hover {
+    transition: transform 0.3s ease;
+    transform: scale(1.05);
+}
+
 .hero {
     padding: 50px 20px;
 }
