@@ -147,6 +147,7 @@ h1 {
 .slide:hover {
     background: #d0d0d0;
     color: #503eff;
+    transition: transform 0.4s ease;
     transform: translateY(-1rem);
 }
 
