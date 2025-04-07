@@ -25,7 +25,7 @@ def add_company_details_to_csv():
             # Ensure the output directory exists
             ensure_directory_exists("website/images")
 
-            stock_data = stock.fetch_stock_data()
+            stock_data = stock.fetch_stock_data_json()
             
             # Process the stock data
             processor = DataProcessor()
@@ -37,15 +37,14 @@ def add_company_details_to_csv():
             print(f"Processed stock data saved to: {processed_file}")
 
 def main():
-    # add_company_details_to_csv()
 
-    line_graph = LineGraph(csv_file_path='./stock-data-csv-files/AAPL_processed.csv')
-    line_graph.create_line_graph(x_column='Date', y_column='Close', title='Apple Stock Price')
-    line_graph.show_graph()
+    # line_graph = LineGraph(csv_file_path='./stock-data-csv-files/AAPL_processed.csv')
+    # line_graph.create_line_graph(x_column='Date', y_column='Close', title='Apple Stock Price')
+    # line_graph.show_graph()
 
-    pie_chart = PieChart(csv_file_path='./stock-data-csv-files/AMZN_processed.csv')
-    pie_chart.create_pie_chart(column_name='Volume', title='Apple Stock Volume Distribution')
-    pie_chart.show_graph()
+    # pie_chart = PieChart(csv_file_path='./stock-data-csv-files/AMZN_processed.csv')
+    # pie_chart.create_pie_chart(column_name='Volume', title='Apple Stock Volume Distribution')
+    # pie_chart.show_graph()
     
     '''# Create visualizations
     visualizer = StockVisualizer()
@@ -54,15 +53,18 @@ def main():
     print(f"Processed stock data for {ticker} and created chart at '{chart_path}'")'''
 
     
-    '''# Example of how to fetch additional data and create more visualizations:
-    
+    # Example of how to fetch additional data and create more visualizations:
+    news = news_api.NewsData(company_name="Tesla")
+    news.fetch_news()
+    news.print_news()
+
     # Fetch news data
-    news_data = news.fetch_news()
-    print(f"Fetched {len(news_data)} news articles")
+    # news_data = news.fetch_news()
+    # print(f"Fetched {len(news_data)} news articles")
     
     # Get price change data
-    price_changes = stock.get_price_change()
-    print(f"Price change: {price_changes}")'''
+    # price_changes = stock.get_price_change()
+    # print(f"Price change: {price_changes}")
 
 if __name__ == "__main__":
     main()
