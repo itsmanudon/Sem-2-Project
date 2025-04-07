@@ -1,7 +1,7 @@
 from eventregistry import *
 import os
 from dotenv import load_dotenv
-import json
+import csv
 
 load_dotenv()
 
@@ -60,3 +60,19 @@ qStr = """
 }
 """
 q = QueryArticlesIter.initWithComplexQuery(qStr)
+
+
+# Execute the query and collect all articles
+articles = list(q.execQuery(er, sortBy="date", sortByAsc=False))
+
+# Check if there are any articles returned
+if articles:
+    # Use the keys of the first article as CSV headers
+    headers = articles[0].keys()
+    with open('articles.csv', 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=headers)
+        writer.writeheader()
+        for article in articles:
+            writer.writerow(article)
+else:
+    print("No articles found.")
