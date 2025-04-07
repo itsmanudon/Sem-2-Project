@@ -36,12 +36,11 @@ body {
     color: white;
     cursor: pointer;
     border-radius: 5px;
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .button:hover {
     transform: scale(1.1);
-    background: linear-gradient(45deg, #005eff, #6b00ff);
 }
 
 /* Stock Container: Arrange sections side by side */
@@ -99,7 +98,7 @@ body {
 }
 
 .stock-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* Stock Prices */
@@ -108,7 +107,8 @@ body {
     font-size: 16px;
 }
 
-.footer {
+/* Footer */
+footer {
     background-color: #111;
     padding: 40px 20px 20px;
     margin-top: 50px;
@@ -185,5 +185,5 @@ body {
     padding-top: 20px;
     color: #888;
     font-size: 14px;
-    text-align: left;
+    text-align: center;
 }
