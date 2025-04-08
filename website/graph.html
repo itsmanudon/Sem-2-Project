@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -84,5 +84,100 @@
         </div>
     </footer>
 
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Graph Viewer</title>
+    <link rel="stylesheet" href="./graph.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div class="logo">TradingView</div>
+            <div class="buttons">
+                <a href="../index.html"><button class="home-page button">Home</button></a>
+                <a href="./signin.html"><button class="login button">Login</button></a>
+                <a href="./about-us.html"><button class="get-started button">About Us</button></a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="graph-sidebar-wrapper">
+            <div class="graph">
+                <img id="graphImage" src="amazongraph.webp" alt="Stock Graph">
+                <div class="stock-label">VODAFONE (VOD)</div>
+            </div>
+            <div class="sidebar">
+                <label for="stockSelect">Choose a stock:</label>
+                <select id="stockSelect">
+                    <option value="AAPL">Apple</option>
+                    <option value="GOOGL">Google</option>
+                    <option value="MSFT">Microsoft</option>
+                    <option value="VOD">Vodafone</option>
+                </select>
+
+                <label for="dateFrom">From:</label>
+                <input type="date" id="dateFrom">
+                
+                <label for="dateTo">To:</label>
+                <input type="date" id="dateTo">
+                
+                <button>View Graph</button>
+
+                <div class="price-container">
+                    <div class="price-box">
+                        <p>Lowest Price Today:</p>
+                        <span id="lowPrice">N/A</span>
+                    </div>
+                    <div class="price-box">
+                        <p>Highest Price Today:</p>
+                        <span id="highPrice">N/A</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dynamic-box">
+            <p>This is your dynamic box. Add more text here to see how the height adjusts automatically!
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero eveniet esse natus quibusdam at. Molestias ea unde officia doloremque praesentium doloribus, cum incidunt qui ad accusamus provident, nostrum voluptates voluptatem.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TradingView</h3>
+                <p>Your go-to platform for market insights, trading tools, and real-time analysis.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="">Charts</a></li>
+                    <li><a href="">Markets</a></li>
+                    <li><a href="">Education</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                    <a href=""><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TradingView. All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

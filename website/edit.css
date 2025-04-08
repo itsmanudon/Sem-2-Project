@@ -11,72 +11,75 @@ body {
 .nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 20px;
     background-color: #111;
 }
 
 .logo {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
-    color: #fff;
 }
 
 .buttons {
     display: flex;
-    gap: 10px;
+    justify-content: left;
 }
 
 .button {
     background: linear-gradient(45deg, #007bff, #a000ff);
     border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: bold;
+    padding: 10px 20px;
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    margin: 0 5px;
     transition: transform 0.3s ease;
 }
 
 .button:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* Stock Container: Arrange sections side by side */
 .stock-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 20px;
-    flex-wrap: wrap;
     padding: 20px;
 }
 
 /* Individual stock sections */
 .stock-box {
     background-color: #222;
-    border-radius: 10px;
-    padding: 20px;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-    flex: 1;
+    padding-right: 40px;
     min-width: 300px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border-radius: 10px;
 }
 
 .stock-box h3 {
     font-size: 22px;
-    color: #503eff;
+    color: white;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 /* Stock Item */
 .stock-item {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 15px;
-    padding: 10px;
+    gap: 35px;
+    padding: 25px;  /* This padding remains unchanged even when items wrap */
     border: 1px solid #333;
     border-radius: 8px;
     background-color: #181818;
+    
 }
 
 /* Stock Image */
@@ -85,16 +88,44 @@ body {
     height: 50px;
 }
 
+/* Responsive adjustments for screen widths below 770px */
+@media (max-width: 1000px) {
+    .stock-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .stock-box {
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 20px;
+    }
+
+    .stock-item {
+        margin-right: 0;
+        flex-direction: column;
+    }
+
+    .stock-image {
+        margin-bottom: 10px;
+    }
+}
+
 /* Stock Button */
 .stock-button {
-    flex-grow: 1;
+    width: 150px; /* Fixed width to keep size consistent */
     padding: 12px;
     font-size: 18px;
     background: linear-gradient(45deg, #007bff, #a000ff);
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 10px;
     transition: transform 0.3s ease-in-out;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .stock-button:hover {
@@ -103,7 +134,7 @@ body {
 
 /* Stock Prices */
 .stock-prices {
-    text-align: right;
+    text-align: left;
     font-size: 16px;
 }
 

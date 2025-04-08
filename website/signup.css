@@ -6,35 +6,35 @@ body {
     color: #fff;
 }
 
-nav {
-    background-color: #111;
-    padding: 20px;
+.nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    padding: 20px;
+    background-color: #111;
 }
-
-nav .logo {
+.logo {
     font-size: 24px;
     font-weight: bold;
-    color: #fff;
 }
-
-nav ul {
-    list-style: none;
+.buttons {
     display: flex;
-    gap: 20px;
-    padding: 0;
+    justify-content: left;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
+.button{
+    background: linear-gradient(45deg, #007bff, #a000ff);
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: transform 0.3s ease;
 }
 
-nav ul li a:hover {
-    color: #00d4c3;
-    font-weight: bold;
+.button:hover {
+    transition: transform 0.3s ease;
+    transform: scale(1.05);
 }
 
 .auth-container {
