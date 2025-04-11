@@ -12,10 +12,10 @@ class NewsData:
 
     def fetch_news(self):
         parameters_news = {
-            "qInTitle": self.company_name,
+            "q": self.company_name,
             "apiKey": self.api_key
         }
-        response_news = requests.get(url="https://newsapi.org/v2/everything", params=parameters_news)
+        response_news = requests.get(url="https://newsapi.org/v2/top-headlines", params=parameters_news)
         response_news.raise_for_status()
         self.news_data = response_news.json()
         return self.news_data
@@ -24,7 +24,7 @@ class NewsData:
         if not self.news_data:
             self.fetch_news()
 
-        for i in range(min(3, len(self.news_data["articles"]))):
+        for i in range(min(5, len(self.news_data["articles"]))):
             print(f"Title : {self.news_data['articles'][i]['title']}")
             print(f"Description : {self.news_data['articles'][i]['description']}")
             print("\n")
