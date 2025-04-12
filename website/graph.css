@@ -6,22 +6,25 @@ body {
     color: #fff;
     text-align: center;
 }
+
 .nav {
     display: flex;
     justify-content: space-between;
     padding: 20px;
     background-color: #111;
 }
+
 .logo {
     font-size: 24px;
     font-weight: bold;
 }
+
 .buttons {
     display: flex;
     justify-content: left;
 }
 
-.button{
+.button {
     background: linear-gradient(45deg, #007bff, #a000ff);
     border: none;
     padding: 10px 20px;
@@ -33,135 +36,87 @@ body {
 }
 
 .button:hover {
-    transition: transform 0.3s ease;
     transform: scale(1.05);
 }
 
-.hero {
-    padding: 50px 20px;
-}
-h1 {
-    font-size: 36px;
-}
-.tabs {
-    margin: 20px 0;
-}
-.tabs a {
-    background: none;
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 18px;
-    text-decoration: none;
-}
-
-.tabs a:hover {
-    font-weight: bold;
-}
-
-.chart-container img {
-    max-width: 90%;
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    width: 100%;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0 0 50px rgba(0, 0, 255, 0.5);
+    background: #1A1A1A;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    margin: 20px auto;
+    justify-content: center;
 }
-.explore {
+
+.graph-sidebar-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* Space between graph and sidebar */
+}
+
+.graph, .dynamic-box {
+    width: 70%; /* Ensures graph and dynamic box have the same width */
+    border-radius: 8px;
     margin-top: 20px;
-    padding: 10px 20px;
-    background: linear-gradient(45deg, #007bff, #a000ff);
+}
+
+.graph {
+    position: relative;
+    height: 600px;
+    background-color: #2E2E2E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.graph img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+}
+
+.stock-label {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    font-weight: bold;
     color: white;
-    border: none;
-    cursor: pointer;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
     border-radius: 5px;
 }
 
-@media (min-width: 768px) {
-    .hero {
-        max-width: 800px;
-        margin: auto;
-    }
-}
-
-.popular-stocks {
-    width: 97.5%;
-    justify-content: center;
-    padding: 20px;
-    background: black;
+.sidebar {
+    width: 25%; /* Sidebar width to fit next to the graph */
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
-.section-title {
-    color: #ffffff;
-    font-size: 24px;
+.sidebar label, .sidebar select, .sidebar input, .sidebar button {
+    width: 100%;
+    padding: 10px;
+    background: #2E2E2E;
+    color: white;
+    border: none;
+    border-radius: 4px;
     margin-bottom: 10px;
-    text-align: left;
-    font-weight: bold;
 }
 
-.slider-container {
-    width: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    display: flex;
-    scrollbar-width: thin;
-    -ms-overflow-style: auto;
-    white-space: nowrap;
-    padding-bottom: 10px;
-}
-
-.slider-wrapper {
-    display: flex;
-    gap: 20px;
-    flex-wrap: nowrap;
-    padding-right: 20px;
-}
-
-.slider-wrapper a {
-    text-decoration: none;
-}
-
-.slide {
-    width: 300px;
-    height: 350px;
-    background: #f0f0f0;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    border-radius: 12px;
-    flex-shrink: 0;
-    scroll-snap-align: start;
+.dynamic-box {
+    background-color: #2E2E2E;
+    color: white;
     padding: 15px;
-    margin-top: 1rem;
-    transition: transform 0.4s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    word-wrap: break-word;
 }
-
-.slide:hover {
-    background: #d0d0d0;
-    color: #503eff;
-    transition: transform 0.4s ease;
-    transform: translateY(-1rem);
-}
-
-.slide img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-@media (max-width: 768px) {
-    .slide {
-        width: 250px;
-        height: 300px;
-        font-size: 16px;
-    }
-}
-
 footer {
     background-color: #111;
     padding: 40px 20px 20px;

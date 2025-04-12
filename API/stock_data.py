@@ -12,9 +12,11 @@ class StockData:
         self.api_key = str(os.getenv("ALPHA_ADVANTAGE_STOCKS_API_KEY"))
         self.data = None
 
-    def fetch_stock_data(self):
+    def fetch_stock_data_json(self):
         parameters = {
             "function": "TIME_SERIES_DAILY",
+            "outputsize": "full",
+            "datatype": "json",
             "symbol": self.stock_symbol,
             "apikey": self.api_key
         }
@@ -25,7 +27,7 @@ class StockData:
 
     def get_price_change(self):
         if not self.data:
-            self.fetch_stock_data()
+            self.fetch_stock_data_json()
 
         today = self.current_date() - dt.timedelta(days=1)
         yesterday = self.current_date() - dt.timedelta(days=2)
