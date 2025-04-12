@@ -1,3 +1,35 @@
+const welcomeArea = document.getElementById("welcomeArea");
+const logoutArea = document.getElementById("logoutArea");
+const loggedInUser = localStorage.getItem("stockviz_loggedInUser");
+
+if (loggedInUser) {
+  welcomeArea.textContent = `Welcome, ${loggedInUser}`;
+  logoutArea.innerHTML = `
+    <button id="logoutBtn" style="
+      background: var(--light-green);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    ">Logout</button>
+  `;
+
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("stockviz_loggedInUser");
+    window.location.reload();
+  });
+} else {
+  welcomeArea.innerHTML = `
+    <a href="login.html" style="margin-right: 1rem; font-size: 0.95rem; color: white; text-decoration: none;">Login</a>
+    <a href="signup.html" style="background: var(--light-green); padding: 8px 16px; border-radius: 6px; color: white; font-weight: 600; text-decoration: none;">Sign Up</a>
+  `;
+  logoutArea.innerHTML = ``; // Keep empty
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   loadStockGrid();
   setupModal();
