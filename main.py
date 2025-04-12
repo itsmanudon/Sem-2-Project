@@ -1,9 +1,11 @@
 from API import stock_data as stock_api
 from API import news_data as news_api
+from API import newsdata as newsdata_api
 from StockProcessing.data_processor import DataProcessor
 from StockProcessing.visualizer import StockVisualizer
 from StockProcessing.line_graph import LineGraph
 from StockProcessing.pie_chart import PieChart
+from StockProcessing.newsdata_processor import NewsDataProcessor
 import pandas as pd
 import os
 import json
@@ -68,6 +70,32 @@ def main():
     # pie_chart = PieChart(csv_file_path='./stock-data-csv-files/AMZN_processed.csv')
     # pie_chart.create_pie_chart(column_name='Volume', title='Apple Stock Volume Distribution')
     # pie_chart.show_graph()
+
+    # newsdata = newsdata_api.NewsData(stock_symbol="AAPL", company_name="Apple Inc")
+    # print(newsdata.fetch_news_data())
+    
+    # Process news data from temp.json
+    news_processor = NewsDataProcessor(company_name="Apple Inc")
+    json_file_path = 'd:/Github Repos/Sem-2-Project/StockProcessing/temp.json'
+
+    # Read the JSON data
+    with open(json_file_path, 'r') as file:
+        news_data = json.load(file)
+
+        # Convert JSON data to CSV
+        news_csv_path = news_processor.process_json_to_dataframe(json_data=news_data)
+        print(f"News data converted to CSV: {news_csv_path}")
+
+        # Save the processed news data
+        processed_news_file = news_processor.save_processed_data_as_CSV()
+        print(f"Processed news data saved to: {processed_news_file}")
+
+        # Image URLs extraction
+        image_urls = news_processor.extract_image_urls()
+        print("Extracted image URLs:")
+        for url in image_urls:
+            print(f"  {url}")
+
     
     '''# Create visualizations
     visualizer = StockVisualizer()
