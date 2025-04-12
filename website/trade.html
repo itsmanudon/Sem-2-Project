@@ -19,14 +19,13 @@
         <div class="header-top-bar">
             <div style="display: flex; align-items: center; gap: 1.5rem;">
                 <div id="welcomeArea" style="font-size: 1rem; font-weight: 500; color: var(--light-gold);">
-                    Welcome back, <strong>JohnDoe</strong> (ID: USER-XF7892)
+                    <!-- Injected welcome/login/signup -->
                 </div>
             </div>
+
+            <!-- Right Section -->
             <div id="logoutArea">
-                <button class="logout-btn"
-                    style="background: none; border: none; color: var(--light-gold); cursor: pointer;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
+                <!-- Injected logout or buttons -->
             </div>
         </div>
 
@@ -43,19 +42,19 @@
                 <a href="news.html"><i class="fas fa-newspaper"></i> News</a>
             </div>
             <div class="search-box">
-                <input type="text" id="stockSearch" placeholder="Search AAPL, TSLA...">
+                <input type="text" id="stockSearch" placeholder="Search AAPL, TSLA, BTC...">
                 <button><i class="fas fa-search"></i></button>
             </div>
-            
+
             <!-- Added Dropdown Menu -->
             <div class="dropdown-menu">
                 <button class="dropdown-btn">Menu <i class="fas fa-chevron-down"></i></button>
                 <div class="dropdown-content">
-                    <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
-                    <a href="./website/markets.html"><i class="fas fa-chart-bar"></i> Markets</a>
-                    <a href="./website/trade.html"><i class="fas fa-exchange-alt"></i> Trade</a>
-                    <a href="./website/compare.html"><i class="fas fa-balance-scale"></i> Compare</a>
-                    <a href="./website/news.html"><i class="fas fa-newspaper"></i> News</a>
+                    <a href="../index.html" class="active"><i class="fas fa-home"></i> Home</a>
+                    <a href="markets.html"><i class="fas fa-chart-bar"></i> Markets</a>
+                    <a href="trade.html"><i class="fas fa-exchange-alt"></i> Trade</a>
+                    <a href="compare.html"><i class="fas fa-balance-scale"></i> Compare</a>
+                    <a href="news.html"><i class="fas fa-newspaper"></i> News</a>
                 </div>
             </div>
         </nav>
