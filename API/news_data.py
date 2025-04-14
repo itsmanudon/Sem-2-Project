@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class NewsData:
+    """Old News API class for fetching news articles."""
     def __init__(self, company_name):
         self.company_name = company_name
         self.api_key = str(os.getenv("NEWSAPI_ORG_API_KEY"))

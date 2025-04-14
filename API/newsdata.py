@@ -9,6 +9,7 @@ load_dotenv()
 YOUR_API_KEY = str(os.getenv("NEWSDATA_API_KEY"))
 
 class NewsData:
+    """New API class for fetching news articles."""
     def __init__(self, stock_symbol, company_name):
         self.stock_symbol = stock_symbol
         self.company_name = company_name

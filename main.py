@@ -61,6 +61,40 @@ def add_specific_comapnies():
             processed_file = processor.save_processed_data()
             print(f"Processed stock data saved to: {processed_file}")
 
+def add_news_data():
+    """
+    Fetch and process news data for companies using the new News API.
+    """
+
+    with open('D:\\Github Repos\\Sem-2-Project\\companies.json', 'r') as file:
+        companies_details = json.load(file)
+        for company_detail in companies_details:
+            news_data = newsdata_api.NewsData(stock_symbol=company_detail['symbol'], company_name=company_detail['name'])
+            news_json_data = news_data.fetch_news_data()
+
+            if news_json_data is None:
+                print(f"Failed to fetch news data for {company_detail['name']}")
+                continue
+
+            news_processor = NewsDataProcessor(company_name=company_detail['name'])
+
+            # Convert JSON data to CSV
+            news_csv_path = news_processor.process_json_to_dataframe(json_data=news_json_data)
+            if news_csv_path is None:
+                print(f"Failed to process news data for {company_detail['name']}")
+                continue
+            print(f"News data converted to CSV: {news_csv_path}")
+
+            # Save the processed news data
+            processed_news_file = news_processor.save_processed_data_as_CSV()
+            print(f"Processed news data saved to: {processed_news_file}")
+
+            # Image URLs extraction
+            # image_urls = news_processor.extract_image_urls()
+            # print("Extracted image URLs:")
+            # for url in image_urls:
+            #     print(f"  {url}")
+
 def main():
 
     # line_graph = LineGraph(csv_file_path='./stock-data-csv-files/AAPL_processed.csv')
@@ -74,27 +108,7 @@ def main():
     # newsdata = newsdata_api.NewsData(stock_symbol="AAPL", company_name="Apple Inc")
     # print(newsdata.fetch_news_data())
     
-    # Process news data from temp.json
-    news_processor = NewsDataProcessor(company_name="Apple Inc")
-    json_file_path = 'd:/Github Repos/Sem-2-Project/StockProcessing/temp.json'
-
-    # Read the JSON data
-    with open(json_file_path, 'r') as file:
-        news_data = json.load(file)
-
-        # Convert JSON data to CSV
-        news_csv_path = news_processor.process_json_to_dataframe(json_data=news_data)
-        print(f"News data converted to CSV: {news_csv_path}")
-
-        # Save the processed news data
-        processed_news_file = news_processor.save_processed_data_as_CSV()
-        print(f"Processed news data saved to: {processed_news_file}")
-
-        # Image URLs extraction
-        image_urls = news_processor.extract_image_urls()
-        print("Extracted image URLs:")
-        for url in image_urls:
-            print(f"  {url}")
+    #add_news_data()
 
     
     '''# Create visualizations
