@@ -98,5 +98,101 @@
   {
     "symbol": "KO",
     "name": "The Coca-Cola Company"
+  },
+  {
+    "symbol": "RELIANCE",
+    "name": "Reliance Industries Limited"
+  },
+  {
+    "symbol": "TCS",
+    "name": "Tata Consultancy Services Limited"
+  },
+  {
+    "symbol": "HDFCBANK",
+    "name": "HDFC Bank Limited"
+  },
+  {
+    "symbol": "INFY",
+    "name": "Infosys Limited"
+  },
+  {
+    "symbol": "HINDUNILVR",
+    "name": "Hindustan Unilever Limited"
+  },
+  {
+    "symbol": "ICICIBANK",
+    "name": "ICICI Bank Limited"
+  },
+  {
+    "symbol": "SBIN",
+    "name": "State Bank of India"
+  },
+  {
+    "symbol": "BAJFINANCE",
+    "name": "Bajaj Finance Limited"
+  },
+  {
+    "symbol": "BHARTIARTL",
+    "name": "Bharti Airtel Limited"
+  },
+  {
+    "symbol": "LT",
+    "name": "Larsen & Toubro Limited"
+  },
+  {
+    "symbol": "KOTAKBANK",
+    "name": "Kotak Mahindra Bank Limited"
+  },
+  {
+    "symbol": "ASIANPAINT",
+    "name": "Asian Paints Limited"
+  },
+  {
+    "symbol": "AXISBANK",
+    "name": "Axis Bank Limited"
+  },
+  {
+    "symbol": "WIPRO",
+    "name": "Wipro Limited"
+  },
+  {
+    "symbol": "MARUTI",
+    "name": "Maruti Suzuki India Limited"
+  },
+  {
+    "symbol": "TATASTEEL",
+    "name": "Tata Steel Limited"
+  },
+  {
+    "symbol": "TATAMOTORS",
+    "name": "Tata Motors Limited"
+  },
+  {
+    "symbol": "SUNPHARMA",
+    "name": "Sun Pharmaceutical Industries Limited"
+  },
+  {
+    "symbol": "HCLTECH",
+    "name": "HCL Technologies Limited"
+  },
+  {
+    "symbol": "ADANIPORTS",
+    "name": "Adani Ports and Special Economic Zone Limited"
+  },
+  {
+    "symbol": "NESTLEIND",
+    "name": "Nestle India Limited"
+  },
+  {
+    "symbol": "BAJAJFINSV",
+    "name": "Bajaj Finserv Limited"
+  },
+  {
+    "symbol": "ITC",
+    "name": "ITC Limited"
+  },
+  {
+    "symbol": "M&M",
+    "name": "Mahindra & Mahindra Limited"
   }
 ]

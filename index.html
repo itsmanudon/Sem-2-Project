@@ -11,7 +11,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="./website/assets/css/root_header_footer.css">
     <link rel="stylesheet" href="./website/assets/css/index.css">
-    
 </head>
 
 <body>
@@ -39,7 +38,7 @@
                 <span>StockViz</span>
             </div>
 
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
                 <a href="./website/markets.html"><i class="fas fa-chart-bar"></i> Markets</a>
                 <a href="./website/trade.html"><i class="fas fa-exchange-alt"></i> Trade</a>
@@ -48,21 +47,15 @@
             </div>
 
             <div class="search-box">
-                <input type="text" placeholder="Search AAPL, TSLA, BTC...">
-                <button><i class="fas fa-search"></i></button>
+                <form id="searchForm">
+                    <input type="text" placeholder="Search AAPL, TSLA, BTC...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
             </div>
-            
-            <!-- Added Dropdown Menu -->
-            <div class="dropdown-menu">
-                <button class="dropdown-btn">Menu <i class="fas fa-chevron-down"></i></button>
-                <div class="dropdown-content">
-                    <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
-                    <a href="./website/markets.html"><i class="fas fa-chart-bar"></i> Markets</a>
-                    <a href="./website/trade.html"><i class="fas fa-exchange-alt"></i> Trade</a>
-                    <a href="./website/compare.html"><i class="fas fa-balance-scale"></i> Compare</a>
-                    <a href="./website/news.html"><i class="fas fa-newspaper"></i> News</a>
-                </div>
-            </div>
+
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
@@ -93,7 +86,7 @@
                     <span>Explore Markets</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
-                <a href="#" class="cta-btn secondary">
+                <a href="feature.html" class="cta-btn secondary">
                     <span>Watch Demo</span>
                     <i class="fas fa-play"></i>
                 </a>
@@ -105,41 +98,11 @@
         </div>
     </section>
 
-    <!-- Why Invest Section -->
-    <section class="why-invest">
-        <div class="container">
-            <h2 class="section-title">Why Investing Matters</h2>
-            <div class="invest-cards">
-                <div class="invest-card animate__animated">
-                    <div class="card-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Beat Inflation</h3>
-                    <p>Cash loses value over time. Investing helps your money grow faster than inflation.</p>
-                </div>
-                <div class="invest-card animate__animated">
-                    <div class="card-icon">
-                        <i class="fas fa-piggy-bank"></i>
-                    </div>
-                    <h3>Build Wealth</h3>
-                    <p>Compound returns can turn modest savings into significant wealth over time.</p>
-                </div>
-                <div class="invest-card animate__animated">
-                    <div class="card-icon">
-                        <i class="fas fa-umbrella-beach"></i>
-                    </div>
-                    <h3>Financial Freedom</h3>
-                    <p>Create passive income streams to achieve the lifestyle you want.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Market Overview Section -->
     <section class="market-section">
         <div class="section-header">
             <h2>Today's Market Overview</h2>
-            <a href="./website/news.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
         </div>
 
         <div class="market-cards">
@@ -327,7 +290,7 @@
                     <h3>Tech Rally Continues as AI Stocks Lead Market Recovery</h3>
                     <p>Major tech companies show stronger-than-expected Q2 results, driving NASDAQ to record highs amid
                         growing AI investment.</p>
-                    <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    <a href="./website/news.html" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -370,8 +333,8 @@
         <div class="cta-container">
             <h2>Ready to Elevate Your Trading?</h2>
             <p>Join thousands of investors who use StockViz to make smarter trading decisions.</p>
-            <a href="#" class="cta-btn">
-                <span>Start Free Trial</span>
+            <a href="./website/trade.html" class="cta-btn">
+                <span>Start Trading Now</span>
                 <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -396,10 +359,9 @@
             <div class="footer-section">
                 <h4>Platform</h4>
                 <ul>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Mobile Apps</a></li>
-                    <li><a href="#">API</a></li>
+                    <li><a href="./website/feature.html">Features</a></li>
+                    <li><a href="./website/trade.html">Trading</a></li>
+                    <li><a href="./website/news.html">Trending News</a></li>
                 </ul>
             </div>
 
@@ -407,7 +369,7 @@
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="#">Tutorials</a></li>
-                    <li><a href="#">Market Data</a></li>
+                    <li><a href="./website/markets.html">Market Data</a></li>
                     <li><a href="#">Help Center</a></li>
                 </ul>
             </div>
@@ -415,21 +377,21 @@
             <div class="footer-section">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="./website/about.html">About Us</a></li>
                     <li><a href="#">Careers</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="./website/privacy.html">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2023 StockViz. All rights reserved.</p>
+            <p>&copy; 2025 StockViz. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./assets/js/index.js"></script>
+    <script src="./website/assets/js/index.js"></script>
 </body>
 
 </html>

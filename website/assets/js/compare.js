@@ -2,6 +2,60 @@ const welcomeArea = document.getElementById("welcomeArea");
 const logoutArea = document.getElementById("logoutArea");
 const loggedInUser = localStorage.getItem("stockviz_loggedInUser");
 
+// Add this to your existing index.js (at the top or in the DOMContentLoaded event)
+
+// Search form functionality
+const searchForm = document.getElementById("searchForm");
+if (searchForm) {
+  searchForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const searchInput = this.querySelector('input[type="text"]');
+    const searchTerm = searchInput.value.trim().toUpperCase();
+
+    if (searchTerm) {
+      // Check if the symbol exists in our stocks list
+      const stocks = [
+        { symbol: "AAPL" },
+        { symbol: "ADBE" },
+        { symbol: "BAC" },
+        { symbol: "AMZN" },
+        { symbol: "CRM" },
+        { symbol: "CSCO" },
+        { symbol: "DIS" },
+        { symbol: "GOOGL" },
+        { symbol: "HD" },
+        { symbol: "INTC" },
+        { symbol: "JNJ" },
+        { symbol: "JPM" },
+        { symbol: "KO" },
+        { symbol: "MA" },
+        { symbol: "META" },
+        { symbol: "MSFT" },
+        { symbol: "NFLX" },
+        { symbol: "NVDA" },
+        { symbol: "PFE" },
+        { symbol: "TSLA" },
+        { symbol: "UNH" },
+        { symbol: "V" },
+        { symbol: "WMT" },
+        { symbol: "XOM" },
+        { symbol: "PG" },
+      ];
+
+      const isValidSymbol = stocks.some((stock) => stock.symbol === searchTerm);
+
+      if (isValidSymbol) {
+        // Redirect to markets.html with the symbol as a query parameter
+        window.location.href = `markets.html?symbol=${encodeURIComponent(
+          searchTerm
+        )}`;
+      } else {
+        alert("Please enter a valid stock symbol from our available list");
+      }
+    }
+  });
+}
+
 if (loggedInUser) {
   welcomeArea.textContent = `Welcome, ${loggedInUser}`;
   logoutArea.innerHTML = `
@@ -29,6 +83,19 @@ if (loggedInUser) {
   `;
   logoutArea.innerHTML = ``; // Keep empty
 }
+
+// Mobile menu toggle functionality
+// This code will toggle the mobile menu when the button is clicked
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.querySelector(".mobile-menu-btn");
+  const navLinks = document.querySelector("#navLinks");
+
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const compareBtn = document.getElementById("compareBtn");
@@ -67,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const [data1, data2] = await Promise.all([
-        fetchCSV(`./stock-data-csv-files/${stock1}_processed.csv`),
-        fetchCSV(`./stock-data-csv-files/${stock2}_processed.csv`),
+        fetchCSV(`../../stock-data-csv-files/${stock1}_processed.csv`),
+        fetchCSV(`../../stock-data-csv-files/${stock2}_processed.csv`),
       ]);
 
       fullLabels = data1.map((row) => row.Date);
@@ -192,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const otherDataArray = await Promise.all(
         otherStocks.map((name) =>
-          fetchCSV(`./stock-data-csv-files/${name}_processed.csv`)
+          fetchCSV(`../../stock-data-csv-files/${name}_processed.csv`)
         )
       );
 

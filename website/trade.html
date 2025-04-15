@@ -17,7 +17,9 @@
 <body>
     <!-- Professional Header -->
     <header class="main-header">
-        <div class="header-top-bar">
+        <div class="header-top-bar"
+            style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 2rem;">
+            <!-- Left Section -->
             <div style="display: flex; align-items: center; gap: 1.5rem;">
                 <div id="welcomeArea" style="font-size: 1rem; font-weight: 500; color: var(--light-gold);">
                     <!-- Injected welcome/login/signup -->
@@ -30,34 +32,31 @@
             </div>
         </div>
 
+
         <nav class="main-nav">
             <div class="logo">
                 <i class="fas fa-chart-line"></i>
                 <span>StockViz</span>
             </div>
-            <div class="nav-links">
+
+            <div class="nav-links" id="navLinks">
                 <a href="../index.html"><i class="fas fa-home"></i> Home</a>
                 <a href="markets.html"><i class="fas fa-chart-bar"></i> Markets</a>
                 <a href="trade.html" class="active"><i class="fas fa-exchange-alt"></i> Trade</a>
                 <a href="compare.html"><i class="fas fa-balance-scale"></i> Compare</a>
                 <a href="news.html"><i class="fas fa-newspaper"></i> News</a>
             </div>
+
             <div class="search-box">
-                <input type="text" id="stockSearch" placeholder="Search AAPL, TSLA, BTC...">
-                <button><i class="fas fa-search"></i></button>
+                <form id="searchForm">
+                    <input type="text" placeholder="Search AAPL, TSLA, BTC...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
             </div>
 
-            <!-- Added Dropdown Menu -->
-            <div class="dropdown-menu">
-                <button class="dropdown-btn">Menu <i class="fas fa-chevron-down"></i></button>
-                <div class="dropdown-content">
-                    <a href="../index.html" class="active"><i class="fas fa-home"></i> Home</a>
-                    <a href="markets.html"><i class="fas fa-chart-bar"></i> Markets</a>
-                    <a href="trade.html"><i class="fas fa-exchange-alt"></i> Trade</a>
-                    <a href="compare.html"><i class="fas fa-balance-scale"></i> Compare</a>
-                    <a href="news.html"><i class="fas fa-newspaper"></i> News</a>
-                </div>
-            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 

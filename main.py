@@ -43,7 +43,7 @@ def add_specific_comapnies():
     with open('companies.json', 'r') as file:
         companies_details = json.load(file)
 
-        for i in range(20, 25):
+        for i in range(25, 27):
             # Initialize API objects
             stock = stock_api.StockData(stock_symbol=companies_details[i]['symbol'], company_name=companies_details[i]['name'])
             
@@ -51,6 +51,7 @@ def add_specific_comapnies():
             ensure_directory_exists("website/images")
 
             stock_data = stock.fetch_stock_data_json()
+            print(stock_data)
             
             # Process the stock data
             processor = DataProcessor()
@@ -107,6 +108,8 @@ def main():
 
     # newsdata = newsdata_api.NewsData(stock_symbol="AAPL", company_name="Apple Inc")
     # print(newsdata.fetch_news_data())
+
+    add_specific_comapnies()
     
     #add_news_data()
 

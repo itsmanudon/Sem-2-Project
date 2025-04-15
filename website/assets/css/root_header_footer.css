@@ -217,66 +217,6 @@ img {
   font-size: 0.9rem;
 }
 
-/* Dropdown Menu Styling */
-.dropdown-menu {
-  position: relative;
-  display: inline-block;
-  margin-left: 20px;
-}
-
-.dropdown-btn {
-  background-color: transparent;
-  border: none;
-  color: var(--lighter-gray);
-  font-weight: 500;
-  padding: 10px 15px;
-  border-radius: 4px;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.dropdown-btn:hover {
-  color: var(--gold);
-  background-color: rgba(200, 169, 126, 0.08);
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  right: 0;
-  background-color: var(--black);
-  min-width: 200px;
-  box-shadow: var(--box-shadow);
-  border-radius: 4px;
-  overflow: hidden;
-  z-index: 1000;
-}
-
-.dropdown-content a {
-  display: block;
-  padding: 10px 15px;
-  color: var(--lighter-gray);
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.dropdown-content a i {
-  margin-right: 8px;
-}
-
-.dropdown-content a:hover {
-  background-color: rgba(200, 169, 126, 0.15);
-  color: var(--gold);
-}
-
-/* Show dropdown on button hover (or can be toggled via JS) */
-.dropdown-menu:hover .dropdown-content {
-  display: block;
-}
-
 .search-box {
   display: flex;
   align-items: center;
@@ -316,6 +256,16 @@ img {
 
 .search-box button:hover {
   background-color: var(--dark-gold);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 15px;
 }
 
 /* Footer */
@@ -525,4 +475,19 @@ img {
 .index-value.changing {
   animation: subtleValueChange 0.4s ease-in-out;
   color: var(--gold);
+}
+
+@media (max-width: 992px) {
+  .nav-links.show {
+    display: flex !important;
+    flex-direction: column;
+    background-color: var(--black);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    padding: 10px 0;
+    padding-left: 20px;
+    z-index: 999;
+  }
 }
