@@ -65,104 +65,18 @@
             <h2>Market News & Analysis</h2>
         </div>
 
-        <div class="news-grid">
-            <div class="news-card large">
-                <div class="news-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
-                    <div class="news-tag">FEATURED</div>
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <span class="news-category">MARKET OUTLOOK</span>
-                        <span class="news-date">Today, 10:45 AM</span>
-                    </div>
-                    <h3>Tech Rally Continues as AI Stocks Lead Market Recovery</h3>
-                    <p>Major tech companies show stronger-than-expected Q2 results, driving NASDAQ to record highs amid
-                        growing AI investment.</p>
-                    <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
+        <!-- Company Selection Dropdown -->
+        <div class="company-selector-container">
+            <label for="companySelector">Select Company:</label>
+            <select id="companySelector">
+                <option value="">-- Select a Company --</option>
+                <!-- Options will be populated by JavaScript -->
+            </select>
+        </div>
 
-            <div class="news-card">
-                <div class="news-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <span class="news-category">ECONOMY</span>
-                        <span class="news-date">Today, 8:30 AM</span>
-                    </div>
-                    <h3>Fed Signals Potential Rate Cuts in Coming Months</h3>
-                    <p>Federal Reserve chair hints at possible policy adjustments amid cooling inflation data and
-                        economic slowdown concerns.</p>
-                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="news-card">
-                <div class="news-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1639754390580-2e7437267698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <span class="news-category">CRYPTO</span>
-                        <span class="news-date">Yesterday, 4:15 PM</span>
-                    </div>
-                    <h3>Bitcoin Surges Past $45K as Institutional Interest Grows</h3>
-                    <p>Cryptocurrency markets rally as major financial institutions announce new blockchain investment
-                        products.</p>
-                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="news-card">
-                <div class="news-image"
-                    style="background-image: url('https://www.marketbeat.com/logos/apple-hospitality-reit-inc-logo-1200x675.jpg')">
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <span class="news-category">CRYPTO</span>
-                        <span class="news-date">Yesterday, 4:15 PM</span>
-                    </div>
-                    <h3>Bitcoin Surges Past $45K as Institutional Interest Grows</h3>
-                    <p>Cryptocurrency markets rally as major financial institutions announce new blockchain investment
-                        products.</p>
-                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="news-card large">
-                <div class="news-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
-                    <div class="news-tag">FEATURED</div>
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <span class="news-category">MARKET OUTLOOK</span>
-                        <span class="news-date">Today, 10:45 AM</span>
-                    </div>
-                    <h3>Tech Rally Continues as AI Stocks Lead Market Recovery</h3>
-                    <p>Major tech companies show stronger-than-expected Q2 results, driving NASDAQ to record highs amid
-                        growing AI investment.</p>
-                    <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="news-card">
-                <div class="news-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1639754390580-2e7437267698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <span class="news-category">CRYPTO</span>
-                        <span class="news-date">Yesterday, 4:15 PM</span>
-                    </div>
-                    <h3>Bitcoin Surges Past $45K as Institutional Interest Grows</h3>
-                    <p>Cryptocurrency markets rally as major financial institutions announce new blockchain investment
-                        products.</p>
-                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
+        <div class="news-grid" id="newsGrid">
+            <!-- News cards will be loaded here dynamically -->
+            <p>Loading news...</p>
         </div>
     </section>
 
@@ -218,7 +132,9 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./assets/js/index.js"></script>
+    <!-- Ensure index.js handles header/footer/search logic if needed -->
+    <!-- <script src="./assets/js/index.js"></script> -->
+    <script src="./assets/js/news.js"></script> <!-- Link the specific news script -->
 </body>
 
 </html>

@@ -134,3 +134,35 @@
     color: var(--dark-green);
     gap: 8px;
 }
+
+/* Company Selector Styles */
+.company-selector-container {
+    padding: 0 30px 30px; /* Add padding */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center; /* Center the dropdown */
+}
+
+.company-selector-container label {
+    font-weight: 500;
+    color: var(--dark-gray);
+}
+
+.company-selector-container select {
+    padding: 8px 12px;
+    border: 1px solid var(--light-gray);
+    border-radius: 6px;
+    font-size: 1rem;
+    min-width: 200px; /* Give it some minimum width */
+    background-color: var(--white);
+    cursor: pointer;
+}
+
+/* News Grid Placeholder */
+#newsGrid p {
+    grid-column: 1 / -1; /* Span full width if it's the only element */
+    text-align: center;
+    color: var(--light-gray);
+    padding: 40px 0;
+}
