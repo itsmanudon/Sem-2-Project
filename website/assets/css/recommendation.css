@@ -1,0 +1,215 @@
+/* filepath: d:/Github Repos/Sem-2-Project/website/assets/css/recommendation.css */
+
+/* Recommendation Page Specific Styles */
+
+/* Hero Section */
+.recommend-hero {
+    padding: 80px 30px;
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.9) 0%, rgba(30, 58, 30, 0.7) 100%), url('../images/stock-market.jpeg') center center / cover no-repeat;
+    color: var(--white);
+    text-align: center;
+}
+
+.recommend-hero h1 {
+    font-size: 3rem;
+    color: var(--gold); /* Using gold for highlight */
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+}
+
+.recommend-hero p {
+    font-size: 1.2rem;
+    color: var(--lighter-gray);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Search Section */
+.recommend-search {
+    padding: 60px 30px;
+    background-color: var(--white);
+    text-align: center;
+}
+
+.recommend-search input[type="text"] {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--medium-gray);
+    background-color: var(--white);
+    color: var(--black);
+    margin-right: 10px;
+    min-width: 300px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.recommend-search input[type="text"]:focus {
+    outline: none;
+    border-color: var(--light-green);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.recommend-search button {
+    padding: 12px 25px;
+    background-color: var(--light-green);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.recommend-search button:hover {
+    background-color: var(--lime-green);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.result-area {
+    margin-top: 30px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    min-height: 30px; /* Prevent layout shift */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.result-area.visible {
+        opacity: 1;
+}
+
+.recommended {
+    color: var(--light-green); /* Positive indication */
+}
+
+.not-recommended {
+    color: #F44336; /* Negative indication */
+}
+
+.not-found {
+    color: var(--light-gray); /* Neutral/Info */
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Analysis Section */
+.analysis-section {
+    padding: 80px 30px;
+    background-color: #f9f9f9; /* Light background like features section */
+}
+
+.analysis-section h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--black);
+    margin-bottom: 15px;
+}
+
+.analysis-section > p { /* Targeting the main paragraph */
+    text-align: center;
+    color: var(--light-gray);
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.analysis-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.point {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border-left: 4px solid var(--light-green); /* Accent border */
+}
+
+.point:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.point h3 {
+    color: var(--dark-green); /* Darker green for heading */
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.point p {
+    color: var(--light-gray);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .recommend-hero h1 {
+        font-size: 2.5rem;
+    }
+    .recommend-hero p {
+        font-size: 1.1rem;
+    }
+    .recommend-search input[type="text"] {
+        min-width: auto;
+        width: 70%;
+        margin-right: 0;
+        margin-bottom: 15px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .recommend-search button {
+         display: block;
+         width: 50%;
+         margin-left: auto;
+         margin-right: auto;
+    }
+    .analysis-section h2 {
+        font-size: 2rem;
+    }
+    .analysis-section > p {
+        font-size: 1rem;
+    }
+    .point h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+        .recommend-hero {
+                padding: 60px 20px;
+        }
+        .recommend-hero h1 {
+                font-size: 2rem;
+        }
+        .recommend-hero p {
+                font-size: 1rem;
+        }
+        .recommend-search {
+                padding: 40px 20px;
+        }
+        .recommend-search input[type="text"] {
+                width: 90%;
+        }
+        .recommend-search button {
+                width: 70%;
+                padding: 10px 20px;
+        }
+        .result-area {
+                font-size: 1.2rem;
+        }
+        .analysis-section {
+                padding: 60px 20px;
+        }
+}

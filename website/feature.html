@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StockWiz - Smart Investing Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/feature.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -15,21 +16,9 @@
             <div class="logo">
                 <h1>StockWiz</h1>
             </div>
-            <div class="nav-links">
-                <a href="./feature.html">Features</a>
-                <a href="./markets.html">Markets</a>
-                <a href="./compare.html">Compare</a>
-                <a href="./about.html">About</a>
-            </div>
-            <div class="auth-buttons">
-                <button class="btn btn-outline">Login</button>
-                <button class="btn btn-primary">Sign Up</button>
-            </div>
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <a href="../index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
         </nav>
 
         <div class="hero-content animate__animated animate__fadeIn">
@@ -125,120 +114,19 @@
         </div>
     </section>
 
-    <!-- Markets Section -->
-    <section id="markets" class="markets">
-        <div class="container">
-            <h2 class="section-title">Available Stocks</h2>
-            <div class="search-bar animate__animated">
-                <input type="text" placeholder="Search stocks...">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-            <div class="stocks-grid">
-                <!-- Stock cards populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Compare Section -->
-    <section id="compare" class="compare">
-        <div class="container">
-            <h2 class="section-title">Compare Stocks</h2>
-            <div class="compare-container">
-                <div class="compare-controls">
-                    <div class="stock-selector">
-                        <select id="stock1">
-                            <option value="">Select first stock</option>
-                        </select>
-                        <select id="stock2">
-                            <option value="">Select second stock</option>
-                        </select>
-                    </div>
-                    <div class="timeframe-selector">
-                        <button class="time-btn active">1W</button>
-                        <button class="time-btn">1M</button>
-                        <button class="time-btn">3M</button>
-                        <button class="time-btn">6M</button>
-                        <button class="time-btn">1Y</button>
-                        <button class="time-btn">5Y</button>
-                    </div>
-                    <button class="btn btn-primary compare-btn">Compare</button>
-                </div>
-                <h3>Click on image below to get redirected to page</h3>
-                <div class="chart-container">
-                    <div class="chart-placeholder">
-                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Comparison Chart">
-                        <div class="chart-overlay">
-                            <h3>Select stocks to compare</h3>
-                            <p>Choose two stocks and a timeframe to generate comparison chart</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="comparison-metrics">
-                    <div class="metric-card">
-                        <h4>Average Return</h4>
-                        <div class="metric-value">4.5%</div>
-                    </div>
-                    <div class="metric-card">
-                        <h4>Volatility</h4>
-                        <div class="metric-value">1.0%</div>
-                    </div>
-                    <div class="metric-card">
-                        <h4>Correlation</h4>
-                        <div class="metric-value">0.72</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Call to Action -->
     <section class="cta">
         <div class="container">
             <h2 class="animate__animated">Ready to Start Your Investment Journey?</h2>
             <p class="animate__animated">Join thousands of investors making smarter decisions with StockWiz</p>
-            <button class="btn btn-primary btn-large animate__animated">Get Started for Free</button>
+            <a href="../index.html" class="btn btn-primary btn-large animate__animated">Get Started for Free</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h2>StockWiz</h2>
-                    <p>Smart investing tools for everyone</p>
-                </div>
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h4>Features</h4>
-                        <a href="./markets.html">Markets</a>
-                        <a href="#">Help Center</a>
-
-                        <a href="./news.html">Alerts</a>
-                    </div>
-                    <div class="link-group">
-                        <h4>Resources</h4>
-                        <a href="../index.html">Learning Center</a>
-                        <a href="./news.html">Market News</a>
-                        <a href="#">Blog</a>
-                    </div>
-                    <div class="link-group">
-                        <h4>Company</h4>
-                        <a href="./about.html">About Us</a>
-                        <a href="mailto:stockviz@gmail.com">Contact</a>
-                        <li><a href="./privacy.html">Privacy Policy</a></li>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 StockWiz. All rights reserved.</p>
-                <div class="social-links">
-                    <a href="./comingsoon.html"><i class="fab fa-twitter"></i></a>
-                    <a href="./comingsoon.html"><i class="fab fa-facebook"></i></a>
-                    <a href="./comingsoon.html"><i class="fab fa-linkedin"></i></a>
-                    <a href="./comingsoon.html"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
+            <p>&copy; 2025 StockWiz. All rights reserved.</p>
         </div>
     </footer>
 

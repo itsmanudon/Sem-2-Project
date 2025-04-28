@@ -136,7 +136,7 @@ def analyze_stock(csv_path):
     except Exception as e:
         return f"Error: {str(e)}"
 
-def analyze_all_csvs(folder_path="D:\Github Repos\Sem-2-Project\stock-data-csv-files", output_csv='results.csv'):
+def analyze_all_csvs(folder_path="./website/stock-data-csv-files", output_csv='results.csv'):
     results = []
 
     for file in os.listdir(folder_path):
@@ -148,13 +148,16 @@ def analyze_all_csvs(folder_path="D:\Github Repos\Sem-2-Project\stock-data-csv-f
             else:
                 prediction = result
                 votes = "-"
-            results.append({"Filename": file, "Prediction": prediction, "Votes": votes})
+            base_name = os.path.splitext(file)[0] # Extract base name like 'CRM_processed'
+            stock_symbol = base_name.split('_')[0] # Take the part before the first underscore, e.g., 'CRM'
+            print(stock_symbol)
+            results.append({"Stock": stock_symbol, "Recommendation": prediction, "Votes": votes})
 
     # Save results to new CSV
     result_df = pd.DataFrame(results)
     output_path = os.path.join(folder_path, output_csv)
     result_df.to_csv(output_path, index=False)
-    print(f"✅ Results saved to: {output_path}")
+    print(f"Results saved to: {output_path}")
 
 # --- Run from terminal ---
 if __name__ == "__main__":
