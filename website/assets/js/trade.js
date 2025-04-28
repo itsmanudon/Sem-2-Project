@@ -61,7 +61,7 @@ function verifySession() {
   const enteredPin = prompt("Enter your 4-digit Security PIN:");
 
   if (enteredPin === null) {
-    window.location.href = "./index.html";
+    window.location.href = "index.html";
     return;
   }
 
