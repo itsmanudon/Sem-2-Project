@@ -27,54 +27,111 @@ def analyze_stock(csv_path):
         - It relies on external libraries: pandas, numpy, and statistical functions (mean, median, stdev) from the statistics module.
     """
     try:
+        # --- Constants ---
+        MIN_DATA_POINTS = 6
+        VOTE_THRESHOLD = 4
+        TREND_LOOKBACK = 3 # For consecutive price increase check
+        SLOPE_LOOKBACK = 5 # For linear regression slope check
+
+        # --- Load and Prepare Data ---
         df = pd.read_csv(csv_path)
+        # Standardize column names
         df.columns = [col.lower().strip() for col in df.columns]
 
+        # --- Data Validation ---
+        # Determine the price column ('adj close' preferred over 'close')
         if 'adj close' in df.columns:
             price_col = 'adj close'
         elif 'close' in df.columns:
             price_col = 'close'
         else:
-            return "Invalid"
+            return "Invalid" # Price column missing
 
+        # Check for volume column
         if 'volume' not in df.columns:
-            return "Invalid"
+            return "Invalid" # Volume column missing
 
-        prices = df[price_col].dropna().tolist()
-        volumes = df['volume'].dropna().tolist()
+        # Select, clean, and validate data
+        df = df[[price_col, 'volume']].copy() # Use copy to avoid SettingWithCopyWarning
+        df[price_col] = pd.to_numeric(df[price_col], errors='coerce')
+        df['volume'] = pd.to_numeric(df['volume'], errors='coerce')
+        df.dropna(inplace=True) # Remove rows with non-numeric or missing data
 
-        if len(prices) < 6 or len(volumes) < 6:
-            return "Insufficient Data"
+        if len(df) < MIN_DATA_POINTS:
+            return "Insufficient Data" # Not enough valid data points
 
-        current_price = prices[-1]
-        current_volume = volumes[-1]
-        historical_prices = prices[:-1]
-        historical_volumes = volumes[:-1]
+        # --- Separate Current and Historical Data ---
+        prices = df[price_col]
+        volumes = df['volume']
 
-        m_mean = mean(historical_prices)
-        m_median = median(historical_prices)
-        m_std = stdev(historical_prices)
-        avg_volume = mean(historical_volumes)
+        current_price = prices.iloc[-1]
+        current_volume = volumes.iloc[-1]
+        historical_prices = prices.iloc[:-1]
+        historical_volumes = volumes.iloc[:-1]
 
+        # Ensure enough historical data for all calculations
+        min_hist_len = max(TREND_LOOKBACK, SLOPE_LOOKBACK, 2) # Need at least 2 for stdev
+        if len(historical_prices) < min_hist_len:
+             return "Insufficient Historical Data for Analysis"
+
+        # --- Calculate Historical Metrics ---
+        hist_price_mean = historical_prices.mean()
+        hist_price_median = historical_prices.median()
+        # Use ddof=1 for sample standard deviation, matching statistics.stdev
+        hist_price_std = historical_prices.std(ddof=1)
+        hist_volume_mean = historical_volumes.mean()
+
+        # Handle potential NaN std dev (if only one historical point, though prevented by len check)
+        # or zero std dev (if all historical prices are identical)
+        if pd.isna(hist_price_std) or hist_price_std == 0:
+            # Cannot reliably use std dev based signal
+            hist_price_std = 0 # Set to 0 to prevent errors in comparison
+
+        # --- Voting Logic ---
         votes_up = 0
-        if m_mean > current_price:
-            votes_up += 1
-        if m_median > current_price:
-            votes_up += 1
-        if current_price < m_mean and abs(current_price - m_mean) <= m_std:
-            votes_up += 1
-        if current_volume > avg_volume:
-            votes_up += 1
-        if historical_prices[-1] > historical_prices[-2] > historical_prices[-3]:
+
+        # Vote 1: Current price is below historical mean (potential buy low)
+        if current_price < hist_price_mean:
             votes_up += 1
 
-        x = np.arange(5)
-        y = np.array(historical_prices[-5:])
-        slope = np.polyfit(x, y, 1)[0]
-        if slope > 0:
+        # Vote 2: Current price is below historical median (another measure of central tendency)
+        if current_price < hist_price_median:
             votes_up += 1
 
-        return "Yes" if votes_up >= 4 else "No", votes_up
+        # Vote 3: Current price is below mean but within 1 standard deviation
+        # Only vote if std > 0, otherwise the comparison is less meaningful
+        if hist_price_std > 0 and current_price < hist_price_mean and abs(current_price - hist_price_mean) <= hist_price_std:
+             votes_up += 1
+
+        # Vote 4: Current volume is above historical average (increased activity)
+        if current_volume > hist_volume_mean:
+            votes_up += 1
+
+        # Vote 5: Recent price trend (last TREND_LOOKBACK historical points increasing)
+        if len(historical_prices) >= TREND_LOOKBACK:
+            recent_prices = historical_prices.iloc[-TREND_LOOKBACK:]
+            # Check if prices are strictly increasing: p[-1] > p[-2] > p[-3] ...
+            is_trending_up = all(recent_prices.iloc[i] > recent_prices.iloc[i-1] for i in range(1, TREND_LOOKBACK))
+            if is_trending_up:
+             votes_up += 1
+
+        # Vote 6: Positive slope over the last SLOPE_LOOKBACK historical points (momentum)
+        if len(historical_prices) >= SLOPE_LOOKBACK:
+            y = historical_prices.iloc[-SLOPE_LOOKBACK:].values
+            x = np.arange(SLOPE_LOOKBACK)
+            try:
+                # Fit a linear regression line (degree 1 polynomial)
+                slope = np.polyfit(x, y, 1)[0]
+                if slope > 0:
+                    votes_up += 1
+            except (np.linalg.LinAlgError, ValueError):
+            # Handle cases where slope calculation fails (e.g., singular matrix)
+            # No vote is added in this case. Consider logging this event.
+                pass # print(f"Warning: Slope calculation failed for {csv_path}")
+
+        # --- Final Recommendation ---
+        recommendation = "Yes" if votes_up >= VOTE_THRESHOLD else "No"
+        return recommendation, votes_up
 
     except Exception as e:
         return f"Error: {str(e)}"

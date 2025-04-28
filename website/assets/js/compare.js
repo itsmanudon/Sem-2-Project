@@ -134,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const [data1, data2] = await Promise.all([
-        fetchCSV(`../../stock-data-csv-files/${stock1}_processed.csv`),
-        fetchCSV(`../../stock-data-csv-files/${stock2}_processed.csv`),
+        fetchCSV(`./stock-data-csv-files/${stock1}_processed.csv`),
+        fetchCSV(`stock-data-csv-files/${stock2}_processed.csv`),
       ]);
 
       fullLabels = data1.map((row) => row.Date);
