@@ -49,7 +49,7 @@ async function displayNews(symbol) {
     }
 
     $.ajax({
-        url: `news-data-csv-files/${symbol}.csv`,
+        url: `../../../news-data-csv-files/${symbol}.csv`,
         method: 'GET',
         dataType: 'text',
         success: function(csvData) {
@@ -171,7 +171,7 @@ async function displayNews(symbol) {
         if (!response.ok) {
             // Handle cases where the CSV file might not exist for a symbol
             if (response.status === 404) {
-                 newsGrid.innerHTML = `<p>No news data found for ${symbol}.</p>`;
+                newsGrid.innerHTML = `<p>No news data found for ${symbol}.</p>`;
             } else {
                 throw new Error(`Could not load news for ${symbol}. Status: ${response.status}`);
             }

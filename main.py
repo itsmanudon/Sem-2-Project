@@ -43,7 +43,7 @@ def add_specific_comapnies():
     with open('companies.json', 'r') as file:
         companies_details = json.load(file)
 
-        for i in range(25, 27):
+        for i in range(2, 3):
             # Initialize API objects
             stock = stock_api.StockData(stock_symbol=companies_details[i]['symbol'], company_name=companies_details[i]['name'])
             
