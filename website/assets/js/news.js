@@ -39,88 +39,6 @@ if (loggedInUser) {
     logoutArea.innerHTML = ``; // Keep empty
 }
 
-async function displayNews(symbol) {
-    if (!newsGrid) return;
-    newsGrid.innerHTML = '<p>Loading news...</p>';
-
-    if (!symbol) {
-        newsGrid.innerHTML = '<p>Please select a company to view news.</p>';
-        return;
-    }
-
-    $.ajax({
-        url: `./news-data-csv-files/${symbol}.csv`,
-        method: 'GET',
-        dataType: 'text',
-        success: function(csvData) {
-            // Basic CSV parsing (adjust as needed)
-            const lines = csvData.trim().split('\n');
-            if (lines.length < 2) {
-                newsGrid.innerHTML = `<p>No news articles found for ${symbol}.</p>`;
-                return;
-            }
-
-            // Process header and data rows
-            const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-            const articles = lines.slice(1).map(line => {
-                const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-                const article = {};
-                headers.forEach((header, index) => {
-                    const lowerHeader = header.toLowerCase();
-                    if (lowerHeader.includes('date')) article.date = values[index] || 'N/A';
-                    else if (lowerHeader.includes('category')) article.category = values[index] || 'General';
-                    else if (lowerHeader.includes('headline')) article.headline = values[index] || 'No Headline';
-                    else if (lowerHeader.includes('summary') || lowerHeader.includes('text')) article.summary = values[index] || 'No summary available.';
-                    else if (lowerHeader.includes('image')) article.imageUrl = values[index] || '';
-                    else if (lowerHeader.includes('url') || lowerHeader.includes('link')) article.articleUrl = values[index] || '#';
-                });
-                return article;
-            }).filter(article => article.headline && article.headline !== 'No Headline');
-
-            newsGrid.innerHTML = '';
-            if (articles.length === 0) {
-                newsGrid.innerHTML = `<p>No valid news articles found for ${symbol}.</p>`;
-                return;
-            }
-
-            articles.forEach((article, index) => {
-                const newsCard = document.createElement('div');
-                newsCard.classList.add('news-card');
-
-                // Use placeholder image if imageUrl is empty or invalid
-                const imageUrl = article.imageUrl && (article.imageUrl.startsWith('http') || article.imageUrl.startsWith('/'))
-                                 ? article.imageUrl
-                                 : 'https://via.placeholder.com/400x200.png?text=News';
-
-                newsCard.innerHTML = `
-                    <div class="news-image" style="background-image: url('${imageUrl}')">
-                        ${index === 0 ? '<div class="news-tag">LATEST</div>' : ''}
-                    </div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-category">${article.category}</span>
-                            <span class="news-date">${article.date}</span>
-                        </div>
-                        <h3>${article.headline}</h3>
-                        <p>${article.summary}</p>
-                        <a href="${article.articleUrl}" target="_blank" rel="noopener noreferrer" class="read-more">
-                          Read More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                `;
-                newsGrid.appendChild(newsCard);
-            });
-        },
-        error: function(xhr) {
-            if (xhr.status === 404) {
-                newsGrid.innerHTML = `<p>No news data found for ${symbol}.</p>`;
-            } else {
-                newsGrid.innerHTML = `<p>Could not load news for ${symbol}. Status: ${xhr.status}</p>`;
-            }
-        }
-    });
-}
-
 // --- Mobile Menu Logic ---
 function setupMobileMenu() {
     const mobileBtn = document.querySelector(".mobile-menu-btn");
@@ -156,7 +74,7 @@ function setupMobileMenu() {
  */
 async function displayNews(symbol) {
     if (!newsGrid) return;
-    newsGrid.innerHTML = '<p>Loading news...</p>'; // Show loading state
+    newsGrid.innerHTML = '<p>Loading news...</p>';
 
     if (!symbol) {
         newsGrid.innerHTML = '<p>Please select a company to view news.</p>';
@@ -164,47 +82,60 @@ async function displayNews(symbol) {
     }
 
     try {
-        // Construct the path relative to the HTML file's location based on the selected symbol
         const csvPath = `./news-data-csv-files/${symbol}_news.csv`;
         const response = await fetch(csvPath);
 
         if (!response.ok) {
-            // Handle cases where the CSV file might not exist for a symbol
             if (response.status === 404) {
                 newsGrid.innerHTML = `<p>No news data found for ${symbol}.</p>`;
             } else {
                 throw new Error(`Could not load news for ${symbol}. Status: ${response.status}`);
             }
-            return; // Stop execution if file not found or other error
+            return;
         }
 
         const csvData = await response.text();
-
-        // --- Basic CSV Parsing (Consider using PapaParse for robustness) ---
         const lines = csvData.trim().split('\n');
-        if (lines.length < 2) { // Check if there's data beyond the header
+        if (lines.length < 2) {
              newsGrid.innerHTML = `<p>No news articles found for ${symbol}.</p>`;
              return;
         }
 
-        // Assume header is the first line
-        const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '')); // Trim and remove surrounding quotes if any
+        // Use regex to split on commas that are not inside quotes.
+        function parseCSVLine(line) {
+            return line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                       .map(item => item.replace(/^"(.*)"$/, "$1").trim());
+        }
+
+        const headers = parseCSVLine(lines[0]);
+        // Find the index of the description, summary, or text column (in that order)
+        const descriptionIdx = headers.findIndex(h => h.toLowerCase() === 'description');
+        const summaryIdx = headers.findIndex(h => h.toLowerCase() === 'summary');
+        const textIdx = headers.findIndex(h => h.toLowerCase() === 'text');
+        const headlineIdx = headers.findIndex(h => h.toLowerCase().includes('headline') || h.toLowerCase().includes('title'));
+
         const articles = lines.slice(1).map(line => {
-            // Basic split, may fail with commas within fields. Use a library for complex CSVs.
-            const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+            const values = parseCSVLine(line);
             const article = {};
-            headers.forEach((header, index) => {
-                // Map header names (case-insensitive match for flexibility)
-                const lowerHeader = header.toLowerCase();
-                if (lowerHeader.includes('headline') || lowerHeader.includes('title')) article.headline = values[index] || 'No Headline';
-                else if (lowerHeader.includes('summary') || lowerHeader.includes('text')) article.summary = values[index] || 'No summary available.';
-            });
+
+            // Extract headline
+            if (headlineIdx !== -1) {
+                article.headline = values[headlineIdx] || '';
+            }
+            // Extract description (prefer description > summary > text)
+            if (descriptionIdx !== -1) {
+                article.summary = values[descriptionIdx] || '';
+            } else if (summaryIdx !== -1) {
+                article.summary = values[summaryIdx] || '';
+            } else if (textIdx !== -1) {
+                article.summary = values[textIdx] || '';
+            } else {
+                article.summary = '';
+            }
             return article;
-        }).filter(article => article.headline && article.headline !== 'No Headline'); // Filter out potentially empty rows
+        }).filter(article => article.headline && article.headline !== 'No Headline');
 
-        // --- End Basic CSV Parsing ---
-
-        newsGrid.innerHTML = ''; // Clear loading/error message
+        newsGrid.innerHTML = '';
 
         if (articles.length === 0) {
              newsGrid.innerHTML = `<p>No valid news articles found for ${symbol}.</p>`;
@@ -215,15 +146,26 @@ async function displayNews(symbol) {
             const newsCard = document.createElement('div');
             newsCard.classList.add('news-card');
 
-            newsCard.innerHTML = `
-            <div class="news-content">
-                <h3>${article.headline}</h3>
-                <p>${article.summary}</p>
-            </div>
-            `;
+            const newsContent = document.createElement('div');
+            newsContent.classList.add('news-content');
+
+            const headline = document.createElement('h3');
+            headline.textContent = article.headline || '';
+            
+            const paragraph = document.createElement('p');
+            paragraph.textContent = article.summary || '';
+            // Force styling to ensure full text display
+            paragraph.style.whiteSpace = 'normal';
+            paragraph.style.overflow = 'visible';
+            paragraph.style.textOverflow = 'clip';
+            paragraph.style.wordBreak = 'break-word';
+            paragraph.style.maxHeight = 'none';
+
+            newsContent.appendChild(headline);
+            newsContent.appendChild(paragraph);
+            newsCard.appendChild(newsContent);
             newsGrid.appendChild(newsCard);
         });
-
     } catch (error) {
         console.error(`Error fetching or displaying news for ${symbol}:`, error);
         newsGrid.innerHTML = `<p>Could not load news for ${symbol}. Check console for details.</p>`;
