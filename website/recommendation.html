@@ -12,32 +12,22 @@
   <!-- CSS Files -->
   <link rel="stylesheet" href="./assets/css/root_header_footer.css" />
   <link rel="stylesheet" href="./assets/css/recommendation.css" />
+  <link rel="stylesheet" href="./assets/css/privacy.css" />
 
   <!-- JavaScript Files -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
   <script src="./assets/js/recommendation.js"></script>
-
 </head>
 
 <body>
-
-  <!-- HEADER -->
-  <header class="main-header">
-    <nav class="main-nav">
-      <div class="logo">
-        <i class="fas fa-chart-line"></i> StockViz
-      </div>
-      <!-- <div class="nav-links">
-        <a href="./index.html">Home</a>
-        <a href="./website/markets.html">Markets</a>
-        <a href="./website/trade.html">Trade</a>
-        <a href="./website/compare.html">Compare</a>
-        <a href="./website/news.html">News</a>
-      </div>
-      <div class="search-box">
-        <input type="text" placeholder="Search AAPL, TSLA, BTC...">
-      </div> -->
-    </nav>
+  <header class="privacy-header">
+    <div class="container">
+      <a href="./compare.html" class="back-btn">
+          <i class="fas fa-arrow-left"></i> Back to Compare
+      </a>
+      <h1>Stock Recommendations</h1>
+      <p class="last-updated">Last updated: April 29, 2025</p>
+    </div>
   </header>
 
   <!-- HERO -->
@@ -50,7 +40,7 @@
   <section class="recommend-search">
     <input type="text" id="stockInput" placeholder="Enter Stock Symbol (e.g., AAPL)">
     <button onclick="searchStock()">Check Recommendation</button>
-    <div class="result-area" id="resultArea"></div>
+    <div class="result-area visible" id="resultArea"></div>
   </section>
 
   <!-- WHY ANALYSIS SECTION -->
