@@ -134,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const [data1, data2] = await Promise.all([
-        fetchCSV(`/Sem-2-Project/stock-data-csv-files/${stock1}_processed.csv`),
-        fetchCSV(`/Sem-2-Project/stock-data-csv-files/${stock2}_processed.csv`),
+        fetchCSV(`./stock-data-csv-files/${stock1}_processed.csv`),
+        fetchCSV(`./stock-data-csv-files/${stock2}_processed.csv`),
       ]);
 
       fullLabels = data1.map((row) => row.Date);
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const otherDataArray = await Promise.all(
         otherStocks.map((name) =>
-          fetchCSV(`/Sem-2-Project/stock-data-csv-files/${name}_processed.csv`)
+          fetchCSV(`./stock-data-csv-files/${name}_processed.csv`)
         )
       );
 
@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Client-side JavaScript cannot directly access local file paths like 'D:\...'.
   // Example: If results.csv is in a 'data' folder next to your html file,
   // the path might be './data/results.csv' or '../data/results.csv' depending on structure.
-  const resultsCsvPath = '/Sem-2-Project/stock-data-csv-files/results.csv'; // Adjust this path as needed!
+  const resultsCsvPath = './stock-data-csv-files/results.csv'; // Adjust this path as needed!
 
   compareBtn.addEventListener('click', async () => {
       const stock1Symbol = stockList1.value;
@@ -420,8 +420,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           // Construct filenames as they appear in the CSV (e.g., 'AAPL.csv')
-          const filename1 = `/Sem-2-Project/stock-data-csv-files/${stock1Symbol}.csv`;
-          const filename2 = `/Sem-2-Project/stock-data-csv-files/${stock2Symbol}.csv`;
+          const filename1 = `./stock-data-csv-files/${stock1Symbol}.csv`;
+          const filename2 = `./stock-data-csv-files/${stock2Symbol}.csv`;
 
           // Find the recommendations for the selected stocks
           const recommendation1 = findRecommendation(recommendations, filename1);
