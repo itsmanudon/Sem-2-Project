@@ -43,6 +43,24 @@
     <div class="result-area visible" id="resultArea"></div>
   </section>
 
+  <!-- NEW: RECOMMENDATIONS CONTAINER -->
+  <section class="recommendations-container">
+    <h2>All Stock Recommendations</h2>
+    
+    <div class="filter-controls">
+      <div class="filter-buttons">
+        <button id="allStocksBtn" class="filter-btn active">All Stocks</button>
+        <button id="buyStocksBtn" class="filter-btn">Buy Recommendations</button>
+        <button id="avoidStocksBtn" class="filter-btn">Avoid Recommendations</button>
+      </div>
+    </div>
+    
+    <div class="stocks-container" id="stocksContainer">
+      <!-- Will be populated by JavaScript -->
+      <div class="loading-indicator">Loading recommendations...</div>
+    </div>
+  </section>
+
   <!-- WHY ANALYSIS SECTION -->
   <section class="analysis-section">
     <h2>Why Stock Analysis Matters</h2>

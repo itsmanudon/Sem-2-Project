@@ -11,9 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
         complete: function(results) {
             stockData = results.data;
             console.log('CSV data loaded:', stockData);
+            
+            // Populate the stock cards once data is loaded
+            populateStockCards();
+            
+            // Setup filter buttons
+            setupFilterButtons();
         },
         error: function(error) {
             console.error('Error loading CSV:', error);
+            document.querySelector('.loading-indicator').textContent = 'Error loading recommendations. Please try again later.';
         }
     });
 
@@ -25,7 +32,148 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Function to search for stock recommendations
+// Function to populate stock cards
+function populateStockCards() {
+    const stocksContainer = document.getElementById('stocksContainer');
+    
+    if (!stocksContainer) return;
+    
+    // Clear loading indicator
+    stocksContainer.innerHTML = '';
+    
+    if (stockData.length === 0) {
+        stocksContainer.innerHTML = '<div class="no-results">No recommendations available.</div>';
+        return;
+    }
+    
+    // Create stock cards
+    stockData.forEach(stock => {
+        // Get stock symbol
+        const stockSymbol = getStockSymbol(stock);
+        if (!stockSymbol) return; // Skip if no symbol found
+        
+        // Get recommendation
+        const recommendation = getRecommendation(stock);
+        const isRecommended = recommendation.toLowerCase() === 'yes' || recommendation.toLowerCase() === 'buy';
+        
+        // Get votes
+        const votes = getVotes(stock);
+        
+        // Create card element
+        const card = document.createElement('div');
+        card.className = `stock-card ${isRecommended ? 'buy-recommendation' : 'avoid-recommendation'}`;
+        card.dataset.symbol = stockSymbol;
+        card.dataset.recommendation = isRecommended ? 'buy' : 'avoid';
+        
+        card.innerHTML = `
+            <div class="stock-symbol">${stockSymbol}</div>
+            <div class="stock-recommendation">
+                <span class="recommendation-label">Recommendation:</span>
+                <span class="recommendation-value ${isRecommended ? 'buy' : 'avoid'}">${isRecommended ? 'Buy' : 'Avoid'}</span>
+            </div>
+            <div class="votes-info">
+                <i class="fas fa-users"></i> ${votes} ${votes === 1 ? 'vote' : 'votes'}
+            </div>
+        `;
+        
+        stocksContainer.appendChild(card);
+    });
+}
+
+// Helper functions to extract data from stock objects
+function getStockSymbol(stock) {
+    // Find the stock symbol field
+    const stockField = Object.keys(stock).find(key => 
+        key.toLowerCase() === 'stock' || 
+        key.toLowerCase() === 'symbol' || 
+        key.toLowerCase() === 'ticker');
+    
+    return stockField ? stock[stockField].trim().toUpperCase() : null;
+}
+
+function getRecommendation(stock) {
+    // Find the recommendation field
+    const recommendField = Object.keys(stock).find(key => 
+        key.toLowerCase().includes('recommend') || 
+        key.toLowerCase() === 'action');
+    
+    return recommendField ? stock[recommendField] : '';
+}
+
+function getVotes(stock) {
+    // Find the votes field
+    const votesField = Object.keys(stock).find(key => 
+        key.toLowerCase().includes('vote') || 
+        key.toLowerCase() === 'confidence');
+    
+    return votesField ? parseInt(stock[votesField]) || 0 : 0;
+}
+
+// Setup filter buttons
+function setupFilterButtons() {
+    const allBtn = document.getElementById('allStocksBtn');
+    const buyBtn = document.getElementById('buyStocksBtn');
+    const avoidBtn = document.getElementById('avoidStocksBtn');
+    
+    if (!allBtn || !buyBtn || !avoidBtn) return;
+    
+    // All stocks button
+    allBtn.addEventListener('click', function() {
+        filterStocks('all');
+        setActiveButton(this);
+    });
+    
+    // Buy recommendations button
+    buyBtn.addEventListener('click', function() {
+        filterStocks('buy');
+        setActiveButton(this);
+    });
+    
+    // Avoid recommendations button
+    avoidBtn.addEventListener('click', function() {
+        filterStocks('avoid');
+        setActiveButton(this);
+    });
+}
+
+// Filter stocks based on recommendation
+function filterStocks(filter) {
+    const stockCards = document.querySelectorAll('.stock-card');
+    
+    stockCards.forEach(card => {
+        if (filter === 'all') {
+            card.style.display = '';
+        } else {
+            card.style.display = card.dataset.recommendation === filter ? '' : 'none';
+        }
+    });
+    
+    // Show "no results" message if all cards are hidden
+    const stocksContainer = document.getElementById('stocksContainer');
+    const visibleCards = document.querySelectorAll('.stock-card[style="display: none;"]');
+    const noResultsMsg = document.querySelector('.no-results');
+    
+    if (visibleCards.length === stockCards.length && filter !== 'all') {
+        if (!noResultsMsg) {
+            const msgElement = document.createElement('div');
+            msgElement.className = 'no-results';
+            msgElement.textContent = `No ${filter === 'buy' ? 'buy' : 'avoid'} recommendations found.`;
+            stocksContainer.appendChild(msgElement);
+        }
+    } else if (noResultsMsg) {
+        noResultsMsg.remove();
+    }
+}
+
+// Set active button
+function setActiveButton(button) {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    button.classList.add('active');
+}
+
+// Original search function
 function searchStock() {
     const stockSymbol = document.getElementById('stockInput').value.trim().toUpperCase();
     const resultArea = document.getElementById('resultArea');

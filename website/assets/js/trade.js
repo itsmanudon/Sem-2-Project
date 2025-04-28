@@ -13,6 +13,7 @@ const sellBtn = document.getElementById("sellBtn");
 const portfolioStocks = document.getElementById("portfolioStocks");
 const portfolioValue = document.getElementById("portfolioValue");
 const portfolioChange = document.getElementById("portfolioChange");
+const searchInput = document.getElementById("stockSearch"); // Add this line for the header search bar
 
 // === Stock Data ===
 const stocks = [
@@ -26,6 +27,21 @@ const stocks = [
   { symbol: "JPM", name: "JPMorgan Chase", price: 198.34, change: -0.56 },
   { symbol: "V", name: "Visa Inc.", price: 275.91, change: 0.23 },
   { symbol: "WMT", name: "Walmart Inc.", price: 59.83, change: -1.12 },
+  { symbol: "JNJ", name: "Johnson & Johnson", price: 163.45, change: 0.64 },
+  { symbol: "PG", name: "Procter & Gamble Co.", price: 145.23, change: -0.12 },
+  { symbol: "MA", name: "Mastercard Incorporated", price: 364.31, change: 1.08 },
+  { symbol: "UNH", name: "UnitedHealth Group Incorporated", price: 420.56, change: 0.50 },
+  { symbol: "HD", name: "The Home Depot Inc.", price: 320.47, change: 0.15 },
+  { symbol: "BAC", name: "Bank of America Corporation", price: 34.56, change: -0.76 },
+  { symbol: "XOM", name: "Exxon Mobil Corporation", price: 100.12, change: 1.32 },
+  { symbol: "INTC", name: "Intel Corporation", price: 30.25, change: -0.45 },
+  { symbol: "PFE", name: "Pfizer Inc.", price: 42.67, change: 0.33 },
+  { symbol: "CSCO", name: "Cisco Systems Inc.", price: 50.38, change: -1.05 },
+  { symbol: "ADBE", name: "Adobe Inc.", price: 540.50, change: 0.97 },
+  { symbol: "NFLX", name: "Netflix Inc.", price: 240.78, change: -2.15 },
+  { symbol: "DIS", name: "The Walt Disney Company", price: 90.12, change: 0.78 },
+  { symbol: "CRM", name: "Salesforce Inc.", price: 260.33, change: -1.25 },
+  { symbol: "KO", name: "The Coca-Cola Company", price: 60.44, change: 0.50 }
 ];
 
 // === User Data ===
@@ -44,6 +60,23 @@ document.addEventListener("DOMContentLoaded", () => {
   quantityInput.addEventListener("input", updateTotal);
   buyBtn.addEventListener("click", placeBuyOrder);
   sellBtn.addEventListener("click", placeSellOrder);
+  
+  // Add event listener for search functionality
+  if (searchInput) {
+    searchInput.addEventListener("input", filterStocks);
+    
+    // Add event listener for search button if it exists
+    const searchButton = searchInput.nextElementSibling;
+    if (searchButton && searchButton.tagName === "BUTTON") {
+      searchButton.addEventListener("click", filterStocks);
+    }
+  }
+  
+  // Also add search functionality to the filter input in the main content if it exists
+  const stockFilter = document.getElementById("stockFilter");
+  if (stockFilter) {
+    stockFilter.addEventListener("input", filterStocks);
+  }
 });
 
 // === Session Functions ===
@@ -61,7 +94,7 @@ function verifySession() {
   const enteredPin = prompt("Enter your 4-digit Security PIN:");
 
   if (enteredPin === null) {
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
     return;
   }
 
@@ -104,10 +137,20 @@ function saveUserData() {
 }
 
 // === Stock Grid Functions ===
-function renderStockGrid() {
+function renderStockGrid(filteredStocks = null) {
   stockGrid.innerHTML = "";
+  
+  const stocksToRender = filteredStocks || stocks;
 
-  stocks.forEach((stock) => {
+  if (stocksToRender.length === 0) {
+    const noResults = document.createElement("div");
+    noResults.className = "no-results";
+    noResults.textContent = "No stocks found matching your search.";
+    stockGrid.appendChild(noResults);
+    return;
+  }
+
+  stocksToRender.forEach((stock) => {
     const card = document.createElement("div");
     card.className = "stock-card";
     card.innerHTML = `
@@ -121,6 +164,42 @@ function renderStockGrid() {
     card.addEventListener("click", () => selectStock(stock, card));
     stockGrid.appendChild(card);
   });
+}
+
+// Add new function for stock filtering
+function filterStocks(event) {
+  // Get search term from the event target or from the appropriate input field
+  let searchTerm = "";
+  
+  if (event && event.target) {
+    searchTerm = event.target.value.trim().toLowerCase();
+  } else {
+    // If function is called without an event, check both possible search inputs
+    searchTerm = (searchInput ? searchInput.value : "") || 
+                (document.getElementById("stockFilter") ? document.getElementById("stockFilter").value : "");
+    searchTerm = searchTerm.trim().toLowerCase();
+  }
+  
+  if (!searchTerm) {
+    renderStockGrid(); // If search is empty, show all stocks
+    return;
+  }
+  
+  const filteredStocks = stocks.filter(stock => 
+    stock.symbol.toLowerCase().includes(searchTerm) || 
+    stock.name.toLowerCase().includes(searchTerm)
+  );
+  
+  renderStockGrid(filteredStocks);
+  
+  // Sync the search values between both search inputs if they both exist
+  if (searchInput && document.getElementById("stockFilter") && event && event.target) {
+    if (event.target.id === "stockSearch") {
+      document.getElementById("stockFilter").value = searchInput.value;
+    } else if (event.target.id === "stockFilter") {
+      searchInput.value = document.getElementById("stockFilter").value;
+    }
+  }
 }
 
 function selectStock(stock, cardElement) {

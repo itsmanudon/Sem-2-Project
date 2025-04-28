@@ -229,6 +229,153 @@
     font-size: 0.9rem;
 }
 
+/* NEW: Recommendations Container */
+.recommendations-container {
+    padding: 60px 30px;
+    background-color: #f5f5f5;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.recommendations-container h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--black);
+    margin-bottom: 30px;
+}
+
+/* Filter Controls */
+.filter-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid var(--medium-gray);
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--black);
+}
+
+.filter-btn:hover {
+    background-color: #f0f0f0;
+    border-color: var(--light-green);
+}
+
+.filter-btn.active {
+    background-color: var(--light-green);
+    color: white;
+    border-color: var(--light-green);
+}
+
+/* Stocks Container */
+.stocks-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.stock-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stock-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stock-card.buy-recommendation {
+    border-left: 5px solid var(--light-green);
+}
+
+.stock-card.avoid-recommendation {
+    border-left: 5px solid #F44336;
+}
+
+.stock-symbol {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 10px;
+}
+
+.stock-recommendation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.recommendation-label {
+    font-weight: 500;
+    color: var(--light-gray);
+    margin-right: 10px;
+}
+
+.recommendation-value {
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.recommendation-value.buy {
+    background-color: rgba(76, 175, 80, 0.15);
+    color: var(--light-green);
+}
+
+.recommendation-value.avoid {
+    background-color: rgba(244, 67, 54, 0.15);
+    color: #F44336;
+}
+
+.votes-info {
+    font-size: 0.9rem;
+    color: var(--light-gray);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.votes-info i {
+    margin-right: 5px;
+    color: #FFC107;
+}
+
+.loading-indicator {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    color: var(--light-gray);
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px;
+    color: var(--light-gray);
+    font-size: 1.1rem;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .recommend-hero h1 {
@@ -260,6 +407,24 @@
     }
     .point h3 {
         font-size: 1.3rem;
+    }
+    
+    .filter-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .filter-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .stocks-container {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 20px auto 0;
     }
 }
 
