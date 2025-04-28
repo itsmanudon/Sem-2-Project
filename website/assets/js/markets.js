@@ -248,7 +248,7 @@ function getChartOptions() {
 
 async function fetchStockData(symbol, range = "1M") {
   try {
-    const response = await fetch(`../../stock-data-csv-files/${symbol}_processed.csv`);
+    const response = await fetch(`./stock-data-csv-files/${symbol}_processed.csv`);
     if (!response.ok) {
       throw new Error(`Failed to load data for ${symbol}`);
     }

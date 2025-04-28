@@ -49,7 +49,7 @@ async function displayNews(symbol) {
     }
 
     $.ajax({
-        url: `../../../news-data-csv-files/${symbol}.csv`,
+        url: `./news-data-csv-files/${symbol}.csv`,
         method: 'GET',
         dataType: 'text',
         success: function(csvData) {
@@ -165,7 +165,7 @@ async function displayNews(symbol) {
 
     try {
         // Construct the path relative to the HTML file's location based on the selected symbol
-        const csvPath = `assets/news/${symbol}.csv`;
+        const csvPath = `./news-data-csv-files/${symbol}_news.csv`;
         const response = await fetch(csvPath);
 
         if (!response.ok) {
@@ -194,15 +194,15 @@ async function displayNews(symbol) {
             const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
             const article = {};
             headers.forEach((header, index) => {
-                // Map header names (case-insensitive match for flexibility)
-                const lowerHeader = header.toLowerCase();
-                if (lowerHeader.includes('date')) article.date = values[index] || 'N/A';
-                else if (lowerHeader.includes('category')) article.category = values[index] || 'General';
-                else if (lowerHeader.includes('headline')) article.headline = values[index] || 'No Headline';
-                else if (lowerHeader.includes('summary') || lowerHeader.includes('text')) article.summary = values[index] || 'No summary available.';
-                else if (lowerHeader.includes('image')) article.imageUrl = values[index] || '';
-                else if (lowerHeader.includes('url') || lowerHeader.includes('link')) article.articleUrl = values[index] || '#';
-                // Add more mappings if needed
+            // Map header names (case-insensitive match for flexibility)
+            const lowerHeader = header.toLowerCase();
+            if (lowerHeader.includes('date')) article.date = values[index] || 'N/A';
+            else if (lowerHeader.includes('category')) article.category = values[index] || 'General';
+            else if (lowerHeader.includes('headline') || lowerHeader.includes('title')) article.headline = values[index] || 'No Headline';
+            else if (lowerHeader.includes('summary') || lowerHeader.includes('text')) article.summary = values[index] || 'No summary available.';
+            else if (lowerHeader.includes('image')) article.imageUrl = values[index] || '';
+            else if (lowerHeader.includes('url') || lowerHeader.includes('link')) article.articleUrl = values[index] || '#';
+            // Add more mappings if needed
             });
             return article;
         }).filter(article => article.headline && article.headline !== 'No Headline'); // Filter out potentially empty rows
@@ -220,28 +220,30 @@ async function displayNews(symbol) {
             const newsCard = document.createElement('div');
             newsCard.classList.add('news-card');
             // Optional: Make the first card large
-            // if (index === 0) {
-            //     newsCard.classList.add('large');
-            // }
+            if (index === 0) {
+            newsCard.classList.add('large');
+            }
 
-            // Use placeholder image if imageUrl is empty or invalid
-            const imageUrl = article.imageUrl && (article.imageUrl.startsWith('http') || article.imageUrl.startsWith('/'))
-                             ? article.imageUrl
-                             : 'https://via.placeholder.com/400x200.png?text=News'; // Default placeholder
+            // Validate and trim the image URL before using it
+            const trimmedImageUrl = article.imageUrl ? article.imageUrl.trim() : '';
+            const isValidImage = trimmedImageUrl && (trimmedImageUrl.startsWith('http') || trimmedImageUrl.startsWith('/'));
+            const imageUrl = isValidImage
+                     ? trimmedImageUrl
+                     : 'https://via.placeholder.com/400x200.png?text=News'; // Default placeholder
 
             newsCard.innerHTML = `
-                <div class="news-image" style="background-image: url('${imageUrl}')">
-                    ${index === 0 ? '<div class="news-tag">LATEST</div>' : ''}
+            <div class="news-image" style="background-image: url('${imageUrl}')">
+                ${index === 0 ? '<div class="news-tag">LATEST</div>' : ''}
+            </div>
+            <div class="news-content">
+                <div class="news-meta">
+                <span class="news-category">${article.category}</span>
+                <span class="news-date">${article.date}</span>
                 </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <span class="news-category">${article.category}</span>
-                        <span class="news-date">${article.date}</span>
-                    </div>
-                    <h3>${article.headline}</h3>
-                    <p>${article.summary}</p>
-                    <a href="${article.articleUrl}" target="_blank" rel="noopener noreferrer" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                </div>
+                <h3>${article.headline}</h3>
+                <p>${article.summary}</p>
+                <a href="${article.articleUrl}" target="_blank" rel="noopener noreferrer" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
             `;
             newsGrid.appendChild(newsCard);
         });
