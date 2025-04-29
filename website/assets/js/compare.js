@@ -270,10 +270,19 @@ document.addEventListener("DOMContentLoaded", () => {
         let count = 0;
 
         for (const stockData of otherDataArray) {
-          const val = parseFloat(stockData[sliceStart + i]?.Close);
-          if (!isNaN(val)) {
-            sum += val;
-            count++;
+          // The issue is here - we need to match dates properly
+          // Get the date from our current slice
+          const currentDate = labels[i];
+          
+          // Find the corresponding row in stockData by matching the date
+          const matchingRow = stockData.find(row => row.Date === currentDate);
+          
+          if (matchingRow) {
+            const val = parseFloat(matchingRow.Close);
+            if (!isNaN(val)) {
+              sum += val;
+              count++;
+            }
           }
         }
 
