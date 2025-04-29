@@ -23,16 +23,16 @@ StockViz is a comprehensive platform designed to fetch, process, visualize, and 
 *(Add screenshots of your application here)*
 
 *Main Dashboard / Stock Chart:*
-![Main Dashboard](website/assets/images/placeholder_dashboard.png)
+![Main Dashboard](./website/images/Main.png)
 
 *News Section:*
-![News Section](website/assets/images/placeholder_news.png)
+![News Section](./website/images/News.png)
 
 *Stock Comparison:*
-![Comparison Tool](website/assets/images/placeholder_compare.png)
+![Comparison Tool](./website/images/Compare.png)
 
 *Trading Interface:*
-![Trading Interface](website/assets/images/placeholder_trade.png)
+![Trading Interface](./website/images/Trade.png)
 
 ## 🛠️ Tech Stack
 
