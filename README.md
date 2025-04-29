@@ -11,7 +11,7 @@ StockViz is a comprehensive platform designed to fetch, process, visualize, and 
 *   **News Data Aggregation:** Fetches relevant financial news articles for specified companies.
 *   **Data Processing:** Cleans and transforms raw API data (including non-standard CSV/JSON formats) into structured Pandas DataFrames.
 *   **Data Storage:** Saves processed stock and news data into organized CSV files.
-*   **Backend Visualization:** Generates static charts (like line graphs and pie charts) using Python libraries.
+*   **Database Integration:** Stores processed data in a structured database for efficient querying and persistence.
 *   **Web Interface:** A user-friendly website to:
     *   Display stock information and historical charts (using Chart.js).
     *   Show latest market news.
@@ -40,6 +40,10 @@ StockViz is a comprehensive platform designed to fetch, process, visualize, and 
     *   Python 3.x
     *   Pandas (Data manipulation and processing)
     *   Requests (For interacting with APIs - assumed)
+    *   SQLAlchemy (Database ORM)
+*   **Database:**
+    *   SQLite (Development)
+    *   PostgreSQL/MySQL (Production option)
 *   **Frontend:**
     *   HTML5
     *   CSS3
@@ -64,6 +68,10 @@ Sem-2-Project/
 │   ├── visualizer.py
 │   ├── line_graph.py
 │   └── pie_chart.py
+├── Database/             # Database models and connectivity
+│   ├── models.py         # SQLAlchemy models
+│   ├── db_connector.py   # Database connection management
+│   └── db_operations.py  # CRUD operations
 ├── website/              # Frontend web application
 │   ├── assets/           # CSS, JS, Images
 │   ├── *.html            # HTML pages (index, markets, trade, etc.)
@@ -92,7 +100,7 @@ Sem-2-Project/
 3.  **Install Python dependencies:**
     *(First, create a `requirements.txt` file if you haven't)*
     ```bash
-    pip install pandas requests # Add other libraries if needed
+    pip install pandas requests sqlalchemy # Add other libraries if needed
     pip freeze > requirements.txt # Create the file
     ```
     *Then install:*
@@ -106,14 +114,24 @@ Sem-2-Project/
         *   Modify the API scripts (`API/*.py`) to read keys from environment variables or a configuration file (recommended).
         *   **Do not commit your API keys directly into the code.**
 
-5.  **Run the Data Pipeline:**
+5.  **Database Setup:**
+    *   For SQLite (Development):
+        ```bash
+        python -c "from Database.db_connector import init_db; init_db()"
+        ```
+    *   For PostgreSQL/MySQL (Production):
+        - Install the required database server
+        - Create a database and user with appropriate permissions
+        - Update connection string in `Database/db_connector.py`
+
+6.  **Run the Data Pipeline:**
     *   Execute the main script to fetch and process data:
         ```bash
         python main.py
         ```
-    *   This will populate the `stock-data-csv-files/` directory.
+    *   This will populate the `stock-data-csv-files/` directory and update the database.
 
-6.  **View the Website:**
+7.  **View the Website:**
     *   Open the `index.html` file in your web browser.
     *   Alternatively, for features that might require it, run a simple local web server:
         ```bash
@@ -123,8 +141,9 @@ Sem-2-Project/
 
 ## 🚀 Usage
 
-1.  **Data Processing:** Run `python main.py` to update the stock and news data CSV files. You might need to configure which companies to process in `main.py` or `companies.json`.
-2.  **Web Interface:** Open `index.html` to access the main dashboard. Navigate through the different sections (Markets, Trade, Compare, News) using the navigation bar. The website reads data primarily from the generated CSV files or uses frontend JavaScript for dynamic elements.
+1.  **Data Processing:** Run `python main.py` to update the stock and news data CSV files and database. You might need to configure which companies to process in `main.py` or `companies.json`.
+2.  **Web Interface:** Open `index.html` to access the main dashboard. Navigate through the different sections (Markets, Trade, Compare, News) using the navigation bar. The website reads data primarily from the database or generated CSV files, and uses frontend JavaScript for dynamic elements.
+3.  **Database Queries:** Use the database models in your Python code to query and analyze stock data programmatically.
 
 ## 🤝 Contributing
 
@@ -140,10 +159,3 @@ Contributions are welcome! Please follow these steps:
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details (You should add a LICENSE file).
-```# filepath: /Users/manan/Documents/GitHub/Sem-2-Project/README.md
-# StockViz: Market Analysis & Visualization Platform 📈
-
-![Python Version](https://img.shields.io/badge/python-3.x-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg) <!-- Choose appropriate license -->
-
-StockViz is a comprehensive platform designed to fetch, process, visualize, and display stock market and financial news data. It combines a Python backend for data handling with a dynamic web interface for user interaction and visualization.
